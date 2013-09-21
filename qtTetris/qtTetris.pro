@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     src/Model/TetriminoFactory.cpp \
     src/Model/TetriminoCreateNormal.cpp \
     src/Model/TetriminoCreateDifficult.cpp \
-    src/Model/MyselfTetrimino.cpp
+    src/Model/MyselfTetrimino.cpp \
+    src/Model/TetrisField.cpp
 
 HEADERS  += mainwindow.h \
     Include/Model/Tetrimino_Z.h \
@@ -45,6 +46,7 @@ HEADERS  += mainwindow.h \
     Include/Model/TetriminoFactory.h \
     Include/Model/TetriminoCreateNormal.h \
     Include/Model/TetriminoCreateDifficult.h \
-    Include/Model/MyselfTetrimino.h
+    Include/Model/MyselfTetrimino.h \
+    Include/Model/TetrisField.h
 
 FORMS    += mainwindow.ui

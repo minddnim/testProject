@@ -6,8 +6,8 @@
 class Tetrimino_O : public Tetrimino
 {
 public:
-    explicit Tetrimino_O(const Pos& pos)
-        : Tetrimino(pos, 4, {{0,0}, {0,20}, {20,20}, {20,0}})
+    Tetrimino_O()
+        : Tetrimino(4, {{0,0}, {0,1}, {1,1}, {1,0}})
     {}
     ~Tetrimino_O(){}
 };

@@ -7,16 +7,18 @@
 class Tetrimino
 {
 public:
-    Tetrimino(const Pos& pos, ColorID cid, const std::vector<Pos>& form)
-            : m_BasePos(pos)
-            , m_ColorID(cid)
+    Tetrimino(ColorID cid, const std::vector<Pos>& form)
+            : m_ColorID(cid)
             , m_Form(form)
     {}
-
     virtual ~Tetrimino(){}
 
+    std::vector<Pos> GetTetriminoForm() const
+    {
+        return m_Form;
+    }
+
 protected:
-    Pos m_BasePos;
     const ColorID m_ColorID;
     std::vector<Pos> m_Form;
 };
