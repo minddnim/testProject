@@ -9,7 +9,7 @@ class TetriminoCreateDifficult
 {
 public:
     TetriminoCreateDifficult();
-    virtual ~TetriminoCreateDifficult();
+    virtual ~TetriminoCreateDifficult(){}
 
     virtual std::shared_ptr<Tetrimino> CreateTetrimino();
 };

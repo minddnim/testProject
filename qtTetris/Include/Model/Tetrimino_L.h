@@ -9,7 +9,7 @@ public:
     explicit Tetrimino_L(const Pos& pos)
         : Tetrimino(pos, 3, {{0,-20}, {0,0}, {20,0}, {40,0}})
     {}
-    ~Tetrimino_L(){};
+    ~Tetrimino_L(){}
 };
 
 #endif // TETRIMINO_L_H

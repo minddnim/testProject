@@ -9,7 +9,7 @@ class TetriminoFactory
 {
 public:
     TetriminoFactory();
-    virtual ~TetriminoFactory();
+    virtual ~TetriminoFactory(){}
 
     virtual std::shared_ptr<Tetrimino> CreateTetrimino() = 0;
 };

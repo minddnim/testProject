@@ -13,12 +13,7 @@ public:
             , m_Form(form)
     {}
 
-    virtual ~Tetrimino(){};
-
-    void MoveLeft();
-    void MoveRight();
-    void MoveDown();
-    void MoveBottom();
+    virtual ~Tetrimino(){}
 
 protected:
     Pos m_BasePos;

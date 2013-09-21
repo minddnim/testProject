@@ -9,7 +9,7 @@ class TetriminoCreateNormal
 {
 public:
     TetriminoCreateNormal();
-    virtual ~TetriminoCreateNormal();
+    virtual ~TetriminoCreateNormal(){}
 
     virtual std::shared_ptr<Tetrimino> CreateTetrimino();
 };
