@@ -5,10 +5,10 @@ MyselfTetrimino::RotToLeft()
 {
     switch(m_rotAngle)
     {
-    case ROT_0:     m_rotAngle = ROT_90;  break;
-    case ROT_90:    m_rotAngle = ROT_180; break;
-    case ROT_180:   m_rotAngle = ROT_270; break;
-    case ROT_270:   m_rotAngle = ROT_0;   break;
+    case ROTATE_ANGLE::ROT_0:     m_rotAngle = ROTATE_ANGLE::ROT_90;  break;
+    case ROTATE_ANGLE::ROT_90:    m_rotAngle = ROTATE_ANGLE::ROT_180; break;
+    case ROTATE_ANGLE::ROT_180:   m_rotAngle = ROTATE_ANGLE::ROT_270; break;
+    case ROTATE_ANGLE::ROT_270:   m_rotAngle = ROTATE_ANGLE::ROT_0;   break;
     default: throw std::exception();
     }
     return;
@@ -19,10 +19,10 @@ MyselfTetrimino::RotToRight()
 {
     switch(m_rotAngle)
     {
-    case ROT_0:     m_rotAngle = ROT_270; break;
-    case ROT_90:    m_rotAngle = ROT_0;   break;
-    case ROT_180:   m_rotAngle = ROT_90;  break;
-    case ROT_270:   m_rotAngle = ROT_180; break;
+    case ROTATE_ANGLE::ROT_0:     m_rotAngle = ROTATE_ANGLE::ROT_270; break;
+    case ROTATE_ANGLE::ROT_90:    m_rotAngle = ROTATE_ANGLE::ROT_0;   break;
+    case ROTATE_ANGLE::ROT_180:   m_rotAngle = ROTATE_ANGLE::ROT_90;  break;
+    case ROTATE_ANGLE::ROT_270:   m_rotAngle = ROTATE_ANGLE::ROT_180; break;
     default: throw std::exception();
     }
     return;
@@ -47,7 +47,7 @@ MyselfTetrimino::GetNowPos() const
 }
 
 std::vector<Pos>
-MyselfTetrimino::GetTetriminoPos() const
+MyselfTetrimino::GetTetriminoPos()
 {
     auto blockPos = m_tet.GetTetriminoForm();
     for(auto p : blockPos) RotatePos(p);
@@ -62,19 +62,19 @@ MyselfTetrimino::RotatePos(Pos& pos)
 
     switch(m_rotAngle)
     {
-    case ROT_0:
+    case ROTATE_ANGLE::ROT_0:
         pos.posX = px;
         pos.posY = py;
         break;
-    case ROT_90:
+    case ROTATE_ANGLE::ROT_90:
         pos.posX = -py;
         pos.posY = px;
         break;
-    case ROT_180:
+    case ROTATE_ANGLE::ROT_180:
         pos.posX = -px;
         pos.posY = -py;
         break;
-    case ROT_270:
+    case ROTATE_ANGLE::ROT_270:
         pos.posX = py;
         pos.posY = -px;
         break;

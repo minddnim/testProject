@@ -18,22 +18,14 @@ INCLUDEPATH += Include/View\
 QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp\
-	mainwindow.cpp \
-    src/Model/Tetrimino_Z.cpp \
-    src/Model/Tetrimino_T.cpp \
-    src/Model/Tetrimino_S.cpp \
-    src/Model/Tetrimino_O.cpp \
-    src/Model/Tetrimino_L.cpp \
-    src/Model/Tetrimino_J.cpp \
-    src/Model/Tetrimino_I.cpp \
-    src/Model/Tetrimino.cpp \
+	Dialog.cpp \
     src/Model/TetriminoFactory.cpp \
     src/Model/TetriminoCreateNormal.cpp \
     src/Model/TetriminoCreateDifficult.cpp \
     src/Model/MyselfTetrimino.cpp \
     src/Model/TetrisField.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += Dialog.h \
     Include/Model/Tetrimino_Z.h \
     Include/Model/Tetrimino_T.h \
     Include/Model/Tetrimino_S.h \
@@ -49,4 +41,4 @@ HEADERS  += mainwindow.h \
     Include/Model/MyselfTetrimino.h \
     Include/Model/TetrisField.h
 
-FORMS    += mainwindow.ui
+FORMS    += Dialog.ui
