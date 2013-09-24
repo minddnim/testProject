@@ -4,7 +4,7 @@
 #include "Tetrimino.h"
 #include "DataDefine.h"
 #include <vector>
-
+#include <memory>
 
 class MyselfTetrimino
 {
@@ -18,10 +18,10 @@ private:
     };
 
 public:
-    explicit MyselfTetrimino(Tetrimino& tet)
-        : m_nowPos({0,0})
+    MyselfTetrimino()
+        : m_nowPos({4,3})
         , m_rotAngle(ROTATE_ANGLE::ROT_0)
-        , m_tet(tet)
+        , m_tet(nullptr)
     {}
 
     ~MyselfTetrimino(){}
@@ -29,7 +29,7 @@ public:
 private:
     Pos m_nowPos;
     ROTATE_ANGLE m_rotAngle;
-    Tetrimino& m_tet;
+    std::shared_ptr<Tetrimino> m_tet;
 
 public:
     void RotToLeft();
@@ -38,10 +38,11 @@ public:
     void MoveBottom();
 
     Pos GetNowPos() const;
-    std::vector<Pos> GetTetriminoPos();
+    std::vector<Block> GetTetriminoPos() const;
+    void SetTetrimino(std::shared_ptr<Tetrimino> tet);
 
 private:
-    void RotatePos(Pos& pos);
+    Pos RotatePos(const Pos& p) const;
 };
 
 #endif // MYSELFTETRIMINO_H

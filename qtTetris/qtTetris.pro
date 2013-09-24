@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = qtTetris
 TEMPLATE = app
 
-INCLUDEPATH += Include/View\
+INCLUDEPATH += Include/ViewModel\
 	       Include/Model\
 	       Include/Controll
 
@@ -23,7 +23,10 @@ SOURCES += main.cpp\
     src/Model/TetriminoCreateNormal.cpp \
     src/Model/TetriminoCreateDifficult.cpp \
     src/Model/MyselfTetrimino.cpp \
-    src/Model/TetrisField.cpp
+    src/Model/TetrisField.cpp \
+    src/ViewModel/ConvDispInfo.cpp \
+    src/Model/GameManeger.cpp \
+    src/Controll/Controller.cpp
 
 HEADERS  += Dialog.h \
     Include/Model/Tetrimino_Z.h \
@@ -39,6 +42,9 @@ HEADERS  += Dialog.h \
     Include/Model/TetriminoCreateNormal.h \
     Include/Model/TetriminoCreateDifficult.h \
     Include/Model/MyselfTetrimino.h \
-    Include/Model/TetrisField.h
+    Include/Model/TetrisField.h \
+    Include/ViewModel/ConvDispInfo.h \
+    Include/Model/GameManeger.h \
+    Include/Controll/Controller.h
 
 FORMS    += Dialog.ui

@@ -26,7 +26,7 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QStringLiteral("Dialog"));
-        Dialog->resize(400, 300);
+        Dialog->resize(400, 600);
 
         retranslateUi(Dialog);
 

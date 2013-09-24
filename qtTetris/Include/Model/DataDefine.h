@@ -9,5 +9,13 @@ struct Pos
 
 typedef int ColorID;
 
+struct Block
+{
+    explicit Block(const Pos& pos, ColorID clrId)
+        : p(pos)
+        , id(clrId){}
+    Pos p;
+    ColorID id;
+};
 
 #endif // DATADEFINE_H

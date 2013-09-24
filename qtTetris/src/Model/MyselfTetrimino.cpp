@@ -31,13 +31,12 @@ MyselfTetrimino::RotToRight()
 void
 MyselfTetrimino::MoveDown()
 {
-
+    m_nowPos.posY++;
 }
 
 void
 MyselfTetrimino::MoveBottom()
 {
-
 }
 
 Pos
@@ -46,39 +45,58 @@ MyselfTetrimino::GetNowPos() const
     return m_nowPos;
 }
 
-std::vector<Pos>
-MyselfTetrimino::GetTetriminoPos()
+std::vector<Block>
+MyselfTetrimino::GetTetriminoPos() const
 {
-    auto blockPos = m_tet.GetTetriminoForm();
-    for(auto p : blockPos) RotatePos(p);
-    return blockPos;
+    if(!m_tet) throw std::exception();
+
+    auto blockPos = m_tet->GetTetriminoForm();
+    const auto clrId = m_tet->GetBlockColorID();
+    std::vector<Block> ps;
+    for(auto p : blockPos)
+    {
+        const Pos rotPos = RotatePos(p);
+        const int px = rotPos.posX + m_nowPos.posX;
+        const int py = rotPos.posY + m_nowPos.posY;
+        ps.emplace_back(Block({px, py}, clrId));
+    }
+    return ps;
 }
 
-void
-MyselfTetrimino::RotatePos(Pos& pos)
+Pos
+MyselfTetrimino::RotatePos(const Pos& p) const
 {
-    int px = pos.posX;
-    int py = pos.posY;
+    int px = p.posX;
+    int py = p.posY;
+    Pos rotPos = {0, 0};
 
     switch(m_rotAngle)
     {
     case ROTATE_ANGLE::ROT_0:
-        pos.posX = px;
-        pos.posY = py;
+        rotPos.posX = px;
+        rotPos.posY = py;
         break;
     case ROTATE_ANGLE::ROT_90:
-        pos.posX = -py;
-        pos.posY = px;
+        rotPos.posX = -py;
+        rotPos.posY = px;
         break;
     case ROTATE_ANGLE::ROT_180:
-        pos.posX = -px;
-        pos.posY = -py;
+        rotPos.posX = -px;
+        rotPos.posY = -py;
         break;
     case ROTATE_ANGLE::ROT_270:
-        pos.posX = py;
-        pos.posY = -px;
+        rotPos.posX = py;
+        rotPos.posY = -px;
         break;
     default:
         throw std::exception();
     }
+    return rotPos;
+}
+
+void
+MyselfTetrimino::SetTetrimino(std::shared_ptr<Tetrimino> tet)
+{
+    if(!tet) return;
+    m_tet = tet;
 }

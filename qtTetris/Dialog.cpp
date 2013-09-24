@@ -1,6 +1,8 @@
 #include "Dialog.h"
 #include "ui_Dialog.h"
 
+#include "DataDefine.h"
+
 #include <QtGui>
 #include <QtCore>
 
@@ -8,19 +10,13 @@ Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
 {
-    // 左側面の壁の定義
-    for(int i = 0; i < s_fldH; ++i)
-        m_blockWall.push_back(QRect(s_orgPx, s_orgPy+s_bSz*i, s_bSz, s_bSz));
-
-    // 底の壁の定義
-    for(int i = 0; i < s_fldW+1; ++i)
-        m_blockWall.push_back(QRect(s_orgPx+s_bSz*i, s_orgPy+s_bSz*s_fldH, s_bSz, s_bSz));
-
-    // 右側面の壁の定義
-    for(int i = 0; i < s_fldH; ++i)
-        m_blockWall.push_back(QRect(s_orgPx+s_bSz*s_fldW, s_orgPy+s_bSz*i, s_bSz, s_bSz));
-
     ui->setupUi(this);
+
+    m_timer = new QTimer();
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
+    m_timer->start(TIMER);
+
+    m_ctrl.GameStart();
 }
 
 Dialog::~Dialog()
@@ -28,12 +24,16 @@ Dialog::~Dialog()
     delete ui;
 }
 
-void Dialog::paintEvent(QPaintEvent *e)
+void
+Dialog::paintEvent(QPaintEvent *e)
 {
     DrawWall();
+    DrawField();
+    DrawCtrlBlock();
 }
 
-void Dialog::DrawWall()
+void
+Dialog::DrawWall()
 {
     QPainter painter(this);
     painter.setPen(Qt::black);
@@ -48,9 +48,75 @@ void Dialog::DrawWall()
 
     painter.setBrush(gradient);//グラデーションをブラシにセット
 
-    for(auto r : m_blockWall)
+    const auto wallData = m_info.GetWallData();
+    for(const auto block : wallData)
     {
-        painter.setBrushOrigin(r.x(), r.y());
-        painter.drawRect(r.x(), r.y(), s_bSz, s_bSz);
+        const Pos pos = block.p;
+        const int px = pos.posX * s_bSz + s_orgPx;
+        const int py = pos.posY * s_bSz + s_orgPy;
+        painter.setBrushOrigin(px, py);
+        painter.drawRect(px, py, s_bSz, s_bSz);
     }
+}
+
+void
+Dialog::DrawField()
+{
+    QPainter painter(this);
+    painter.setPen(Qt::black);
+    //アンチエイリアスセット
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    //線形グラデ
+    QLinearGradient gradient(0, 0, s_bSz, s_bSz);
+    gradient.setColorAt(0.0, Qt::white);
+    gradient.setColorAt(0.7, Qt::yellow);
+    gradient.setColorAt(1.0, Qt::darkYellow);
+
+    painter.setBrush(gradient);//グラデーションをブラシにセット
+
+    const auto wallData = m_info.GetFieldData();
+    for(const auto block : wallData)
+    {
+        const Pos pos = block.p;
+        const int px = pos.posX * s_bSz + s_orgPx;
+        const int py = pos.posY * s_bSz;
+        painter.setBrushOrigin(px, py);
+        painter.drawRect(px, py, s_bSz, s_bSz);
+    }
+}
+
+void
+Dialog::DrawCtrlBlock()
+{
+    QPainter painter(this);
+    painter.setPen(Qt::black);
+    //アンチエイリアスセット
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    //線形グラデ
+    QLinearGradient gradient(0, 0, s_bSz, s_bSz);
+    gradient.setColorAt(0.0, Qt::white);
+    gradient.setColorAt(0.7, Qt::magenta);
+    gradient.setColorAt(1.0, Qt::darkMagenta);
+
+    painter.setBrush(gradient);//グラデーションをブラシにセット
+
+    const auto wallData = m_info.GetCtrlBlockData();
+    const int detailPosY = static_cast<int>(m_info.GetDetailPos() * s_bSz);
+    for(const auto block : wallData)
+    {
+        const Pos pos = block.p;
+        const int px = pos.posX * s_bSz + s_orgPx;
+        const int py = pos.posY * s_bSz + detailPosY;
+        painter.setBrushOrigin(px, py);
+        painter.drawRect(px, py, s_bSz, s_bSz);
+    }
+}
+
+void
+Dialog::OnTimer()
+{
+    m_ctrl.NotifyUpdate();
+    update(); // paintEvent関数を呼び出す
 }

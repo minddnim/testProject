@@ -1,6 +1,9 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
+#include "ConvDispInfo.h"
+#include "Controller.h"
+
 #include <QDialog>
 #include <vector>
 
@@ -19,17 +22,25 @@ public:
 private:
     Ui::Dialog *ui;
     static const int s_orgPx = 10;
-    static const int s_orgPy = 70;
+    static const int s_orgPy = 80;
     static const int s_bSz = 20;
-    static const int s_fldH = 20;
-    static const int s_fldW = 10;
-    std::vector<QRect> m_blockWall;
+
+    QTimer *m_timer;            // タイマーオブジェクト
+    static const int TIMER = 1;
+
+    ConvDispInfo m_info;
+    Controller m_ctrl;
 
 protected:
     void paintEvent(QPaintEvent *e);
 
+public slots:
+    void OnTimer();
+
 private:
     void DrawWall();
+    void DrawField();
+    void DrawCtrlBlock();\
 };
 
 #endif // DIALOG_H
