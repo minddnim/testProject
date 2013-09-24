@@ -29,6 +29,18 @@ MyselfTetrimino::RotToRight()
 }
 
 void
+MyselfTetrimino::MoveRight()
+{
+    m_nowPos.posX++;
+}
+
+void
+MyselfTetrimino::MoveLeft()
+{
+    m_nowPos.posX--;
+}
+
+void
 MyselfTetrimino::MoveDown()
 {
     m_nowPos.posY++;

@@ -34,6 +34,8 @@ private:
 public:
     void RotToLeft();
     void RotToRight();
+    void MoveRight();
+    void MoveLeft();
     void MoveDown();
     void MoveBottom();
 

@@ -40,6 +40,14 @@ public:
 
     void GameStart();
     void update();
+
+    void TryRotateRight();
+    void TryRotateLeft();
+    void TryMoveRight();
+    void TryMoveLeft();
+    void TryMoveDown();
+    void TryMoveButtom();
+
     void FreeFall();
 };
 

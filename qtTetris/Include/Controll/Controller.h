@@ -12,6 +12,12 @@ public:
 
 public:
     void GameStart();
+    void KeyPress_A();
+    void KeyPress_S();
+    void KeyPress_D();
+    void KeyPress_W();
+    void KeyPress_Right();
+    void KeyPress_Left();
     void NotifyUpdate();
 };
 

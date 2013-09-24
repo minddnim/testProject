@@ -33,6 +33,7 @@ private:
 
 protected:
     void paintEvent(QPaintEvent *e);
+    void keyPressEvent(QKeyEvent *e);
 
 public slots:
     void OnTimer();

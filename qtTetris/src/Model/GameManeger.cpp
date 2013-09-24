@@ -38,6 +38,42 @@ GameManeger::update()
 }
 
 void
+GameManeger::TryRotateRight()
+{
+    m_myBlock.RotToRight();
+}
+
+void
+GameManeger::TryRotateLeft()
+{
+    m_myBlock.RotToLeft();
+}
+
+void
+GameManeger::TryMoveRight()
+{
+    m_myBlock.MoveRight();
+}
+
+void
+GameManeger::TryMoveLeft()
+{
+    m_myBlock.MoveLeft();
+}
+
+void
+GameManeger::TryMoveDown()
+{
+    m_myBlock.MoveDown();
+}
+
+void
+GameManeger::TryMoveButtom()
+{
+    m_myBlock.MoveBottom();
+}
+
+void
 GameManeger::FreeFall()
 {
     m_myBlock.MoveDown();

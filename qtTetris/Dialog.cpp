@@ -33,6 +33,34 @@ Dialog::paintEvent(QPaintEvent *e)
 }
 
 void
+Dialog::keyPressEvent(QKeyEvent *e)
+{
+    switch(e->key())
+    {
+    case Qt::Key_A:
+        m_ctrl.KeyPress_A();
+        break;
+    case Qt::Key_S:
+        m_ctrl.KeyPress_S();
+        break;
+    case Qt::Key_D:
+        m_ctrl.KeyPress_D();
+        break;
+    case Qt::Key_W:
+        m_ctrl.KeyPress_W();
+        break;
+    case Qt::Key_Left:
+        m_ctrl.KeyPress_Left();
+        break;
+    case Qt::Key_Right:
+        m_ctrl.KeyPress_Right();
+        break;
+    default:
+        break;
+    }
+}
+
+void
 Dialog::DrawWall()
 {
     QPainter painter(this);
