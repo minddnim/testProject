@@ -1,5 +1,4 @@
 #include "GameManeger.h"
-#include "TetriminoCreateNormal.h"
 
 std::vector<Block>
 GameManeger::GetField() const
@@ -22,17 +21,16 @@ GameManeger::GetDetailPos() const
 void
 GameManeger::GameStart()
 {
-    TetriminoCreateNormal factory;
-    m_myBlock.SetTetrimino(factory.CreateTetrimino());
+    m_myBlock.SetTetrimino(m_tetriminoFactory.CreateTetrimino());
 }
 
 void
 GameManeger::update()
 {
     m_freeFallCnt++;
-    if(m_freeFallCnt >= s_intvalTime)
+    if(m_freeFallCnt >= 0)
     {
-        m_freeFallCnt = 0;
+        m_freeFallCnt = -s_intvalTime;
         FreeFall();
     }
 }
@@ -52,19 +50,22 @@ GameManeger::TryRotateLeft()
 void
 GameManeger::TryMoveRight()
 {
-    m_myBlock.MoveRight();
+    if(CanMoveTetrimino({1,0}))
+        m_myBlock.MoveRight();
 }
 
 void
 GameManeger::TryMoveLeft()
 {
-    m_myBlock.MoveLeft();
+    if(CanMoveTetrimino({-1,0}))
+        m_myBlock.MoveLeft();
 }
 
 void
 GameManeger::TryMoveDown()
 {
-    m_myBlock.MoveDown();
+    if(CanMoveTetrimino({0,1}))
+        m_myBlock.MoveDown();
 }
 
 void
@@ -76,5 +77,35 @@ GameManeger::TryMoveButtom()
 void
 GameManeger::FreeFall()
 {
-    m_myBlock.MoveDown();
+    if(CanMoveTetrimino({0,1}))
+    {
+        m_myBlock.MoveDown();
+    }
+    else
+    {
+        DecisionMyTetrimino();
+        m_field.DeleteLine();
+        m_field.AddLine();
+        m_myBlock.ResetPosition();
+        m_myBlock.SetTetrimino(m_tetriminoFactory.CreateTetrimino());
+    }
+}
+
+void
+GameManeger::DecisionMyTetrimino()
+{
+    m_field.AddBlock(m_myBlock.GetTetriminoPos());
+}
+
+bool
+GameManeger::CanMoveTetrimino(const Pos& movePos) const
+{
+    const std::vector<Block> blocks = m_myBlock.GetTetriminoPos();
+    for(const auto block : blocks)
+    {
+        int px = block.p.posX + movePos.posX;
+        int py = block.p.posY + movePos.posY;
+        if(m_field.ExistBlock({px, py})) return false;
+    }
+    return true;
 }

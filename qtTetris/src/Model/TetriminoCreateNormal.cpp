@@ -7,14 +7,14 @@
 #include "Tetrimino_T.h"
 #include "Tetrimino_Z.h"
 #include "TetriminoCreateNormal.h"
-#include <random>
+
 #include <memory>
+#include <time.h>
 
 std::shared_ptr<Tetrimino> TetriminoCreateNormal::CreateTetrimino()
 {
-    std::mt19937 rng;
     std::uniform_int_distribution<int> dist(1,7);
-    switch(dist(rng))
+    switch(dist(m_mt))
     {
     case 1: return std::shared_ptr<Tetrimino>(new Tetrimino_I);
     case 2: return std::shared_ptr<Tetrimino>(new Tetrimino_J);

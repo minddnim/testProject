@@ -10,27 +10,21 @@ TetrisField::TetrisField()
     for(auto line : m_field)
         line.fill(0);
 
-    // テスト表示用データ
-    auto it = m_field.begin(); ++it;++it;++it;
-    for(; it != m_field.end(); ++it)
-        (*it)[2] = 1;
+//    // テスト表示用データ
+//    auto it = m_field.begin(); ++it;++it;++it;++it;
+//    for(; it != m_field.end(); ++it)
+//        (*it)[2] = 1;
 }
 
 void
-TetrisField::AddBlock(const Pos &basePos, const Tetrimino &tet)
+TetrisField::AddBlock(const std::vector<Block>& blocks)
 {
-    auto blocks = tet.GetTetriminoForm();
-    const auto clrId = tet.GetBlockColorID();
-
     for(auto block : blocks)
     {
-        const int px = block.posX + basePos.posX;
-        const int py = block.posY + basePos.posY;
-
         // ここの部分は処理が遅いので、後で修正する
         auto it = m_field.begin();
-        for(int i = 0; it != m_field.end(); ++i, ++it)
-            if(i == px) (*it)[py] = clrId;
+        for(int py = 0; it != m_field.end(); ++py, ++it)
+            if(py == block.p.posY) (*it)[block.p.posX] = block.id;
     }
 }
 
@@ -43,6 +37,16 @@ TetrisField::DeleteLine()
             if(x == 0) return false;
         return true;
     });
+}
+
+void
+TetrisField::AddLine()
+{
+    int addLine = s_fldHeight - m_field.size();
+    for(int i=0; i < addLine; ++i)
+    {
+        m_field.emplace_front();
+    }
 }
 
 std::vector<Block>
@@ -59,4 +63,28 @@ TetrisField::GetTetrisField() const
         }
     }
     return field;
+}
+
+bool
+TetrisField::ExistBlock(const Pos& p) const
+{
+    return (0 != GetBlockColorID(p));
+}
+
+ColorID
+TetrisField::GetBlockColorID(const Pos& p) const
+{
+    if(!IsPosInRange(p)) return -1;
+    auto it = m_field.begin();
+    for(int py = 0; it != m_field.end(); ++py, ++it)
+        if(py == p.posY) return (*it)[p.posX];
+    return -1;
+}
+
+bool
+TetrisField::IsPosInRange(const Pos& p) const
+{
+    if(!((0 <= p.posX) && (p.posX < s_fldWidth))) return false;
+    if(!((0 <= p.posY) && (p.posY < s_fldHeight))) return false;
+    return true;
 }

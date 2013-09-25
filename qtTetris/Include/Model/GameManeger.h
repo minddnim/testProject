@@ -4,6 +4,8 @@
 #include "DataDefine.h"
 #include "TetrisField.h"
 #include "MyselfTetrimino.h"
+#include "TetriminoFactory.h"
+#include "TetriminoCreateNormal.h"
 
 #include <memory>
 #include <vector>
@@ -19,19 +21,18 @@ public:
     ~GameManeger(){}
 
 private:
-    GameManeger()
-        : m_freeFallCnt(0)
-    {}
+    GameManeger(){}
 
     GameManeger(const GameManeger& rhs);
     GameManeger& operator=(const GameManeger& rhs);
 
 private:
+    TetriminoCreateNormal m_tetriminoFactory;
     MyselfTetrimino m_myBlock;
     TetrisField m_field;
 
-    int m_freeFallCnt;
-    static const int s_intvalTime = 200;  // ここを大きくすると落ちる速度が低下
+    static const int s_intvalTime = 20;  // ここを大きくすると落ちる速度が低下
+    int m_freeFallCnt = -s_intvalTime;
 
 public:
     std::vector<Block> GetField() const;
@@ -49,6 +50,10 @@ public:
     void TryMoveButtom();
 
     void FreeFall();
+
+private:
+    bool CanMoveTetrimino(const Pos& movePos) const;
+    void DecisionMyTetrimino();
 };
 
 #endif // GAMEMANEGER_H

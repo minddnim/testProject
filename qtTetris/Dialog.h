@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::Dialog *ui;
-    static const int s_orgPx = 10;
+    static const int s_orgPx = 50;
     static const int s_orgPy = 80;
     static const int s_bSz = 20;
 

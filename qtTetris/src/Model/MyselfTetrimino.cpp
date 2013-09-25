@@ -1,4 +1,7 @@
 #include "MyselfTetrimino.h"
+#include "DataDefine.h"
+
+const Pos MyselfTetrimino::s_startPos = {4,3};
 
 void
 MyselfTetrimino::RotToLeft()
@@ -49,6 +52,11 @@ MyselfTetrimino::MoveDown()
 void
 MyselfTetrimino::MoveBottom()
 {
+}
+
+void MyselfTetrimino::ResetPosition()
+{
+    m_nowPos = s_startPos;
 }
 
 Pos

@@ -15,14 +15,19 @@ public:
 private:
     static const int s_fldWidth = 10;
     static const int s_fldHeight = 20+4;
-    std::list< std::array<ColorID,s_fldWidth> > m_field;
+    std::list<std::array<ColorID,s_fldWidth>> m_field;
 
 private:
-    void AddBlock(const Pos& basePos, const Tetrimino& tet);
-    void DeleteLine();
+    bool IsPosInRange(const Pos& p) const;
 
 public:
+    void AddBlock(const std::vector<Block> &blocks);
+    void DeleteLine();
+    void AddLine();
+
     std::vector<Block> GetTetrisField() const;
+    bool ExistBlock(const Pos& p) const;
+    ColorID GetBlockColorID(const Pos& p) const;
 };
 
 #endif // TETRISFIELD_H

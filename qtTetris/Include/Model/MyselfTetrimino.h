@@ -19,7 +19,7 @@ private:
 
 public:
     MyselfTetrimino()
-        : m_nowPos({4,3})
+        : m_nowPos(s_startPos)
         , m_rotAngle(ROTATE_ANGLE::ROT_0)
         , m_tet(nullptr)
     {}
@@ -30,6 +30,7 @@ private:
     Pos m_nowPos;
     ROTATE_ANGLE m_rotAngle;
     std::shared_ptr<Tetrimino> m_tet;
+    static const Pos s_startPos;
 
 public:
     void RotToLeft();
@@ -38,6 +39,7 @@ public:
     void MoveLeft();
     void MoveDown();
     void MoveBottom();
+    void ResetPosition();
 
     Pos GetNowPos() const;
     std::vector<Block> GetTetriminoPos() const;
