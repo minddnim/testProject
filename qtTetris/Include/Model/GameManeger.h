@@ -31,7 +31,7 @@ private:
     MyselfTetrimino m_myBlock;
     TetrisField m_field;
 
-    static const int s_intvalTime = 20;  // ここを大きくすると落ちる速度が低下
+    static const int s_intvalTime = 200;  // ここを大きくすると落ちる速度が低下
     int m_freeFallCnt = -s_intvalTime;
 
 public:

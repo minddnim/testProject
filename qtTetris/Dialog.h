@@ -6,6 +6,7 @@
 
 #include <QDialog>
 #include <vector>
+#include <map>
 
 namespace Ui {
 class Dialog;
@@ -31,6 +32,14 @@ private:
     ConvDispInfo m_info;
     Controller m_ctrl;
 
+    struct SetColors
+    {
+        QColor startColor;
+        QColor centerColor;
+        QColor endColor;
+    };
+    std::map<ColorID, SetColors> m_dispColorConfig;
+
 protected:
     void paintEvent(QPaintEvent *e);
     void keyPressEvent(QKeyEvent *e);
@@ -41,7 +50,7 @@ public slots:
 private:
     void DrawWall();
     void DrawField();
-    void DrawCtrlBlock();\
+    void DrawCtrlBlock();
 };
 
 #endif // DIALOG_H

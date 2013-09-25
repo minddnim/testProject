@@ -12,6 +12,15 @@ Dialog::Dialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    m_dispColorConfig[-1] = {Qt::white, Qt::lightGray, Qt::gray};
+    m_dispColorConfig[1] = {Qt::white, Qt::cyan, Qt::darkCyan};
+    m_dispColorConfig[2] = {Qt::white, Qt::blue, Qt::darkBlue};
+    m_dispColorConfig[3] = {Qt::white, {243, 152, 0}, {255, 140, 0}};
+    m_dispColorConfig[4] = {Qt::white, Qt::yellow, Qt::darkYellow};
+    m_dispColorConfig[5] = {Qt::white, Qt::green, Qt::darkGreen};
+    m_dispColorConfig[6] = {Qt::white, Qt::magenta, Qt::darkMagenta};
+    m_dispColorConfig[7] = {Qt::white, Qt::red, Qt::darkRed};
+
     m_timer = new QTimer();
     connect(m_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     m_timer->start(TIMER);
@@ -70,15 +79,15 @@ Dialog::DrawWall()
 
     //線形グラデ
     QLinearGradient gradient(0, 0, s_bSz, s_bSz);
-    gradient.setColorAt(0.0, Qt::white);
-    gradient.setColorAt(0.7, Qt::lightGray);
-    gradient.setColorAt(1.0, Qt::gray);
-
-    painter.setBrush(gradient);//グラデーションをブラシにセット
 
     const auto wallData = m_info.GetWallData();
     for(const auto block : wallData)
     {
+        gradient.setColorAt(0.0, m_dispColorConfig[block.id].startColor);
+        gradient.setColorAt(0.7, m_dispColorConfig[block.id].centerColor);
+        gradient.setColorAt(1.0, m_dispColorConfig[block.id].endColor);
+        painter.setBrush(gradient);//グラデーションをブラシにセット
+
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;
         const int py = pos.posY * s_bSz + s_orgPy;
@@ -97,15 +106,15 @@ Dialog::DrawField()
 
     //線形グラデ
     QLinearGradient gradient(0, 0, s_bSz, s_bSz);
-    gradient.setColorAt(0.0, Qt::white);
-    gradient.setColorAt(0.7, Qt::yellow);
-    gradient.setColorAt(1.0, Qt::darkYellow);
-
-    painter.setBrush(gradient);//グラデーションをブラシにセット
 
     const auto wallData = m_info.GetFieldData();
     for(const auto block : wallData)
     {
+        gradient.setColorAt(0.0, m_dispColorConfig[block.id].startColor);
+        gradient.setColorAt(0.7, m_dispColorConfig[block.id].centerColor);
+        gradient.setColorAt(1.0, m_dispColorConfig[block.id].endColor);
+        painter.setBrush(gradient);//グラデーションをブラシにセット
+
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;
         const int py = pos.posY * s_bSz;
@@ -124,16 +133,16 @@ Dialog::DrawCtrlBlock()
 
     //線形グラデ
     QLinearGradient gradient(0, 0, s_bSz, s_bSz);
-    gradient.setColorAt(0.0, Qt::white);
-    gradient.setColorAt(0.7, Qt::magenta);
-    gradient.setColorAt(1.0, Qt::darkMagenta);
-
-    painter.setBrush(gradient);//グラデーションをブラシにセット
 
     const auto wallData = m_info.GetCtrlBlockData();
     const int detailPosY = static_cast<int>(m_info.GetDetailPos() * s_bSz);
     for(const auto block : wallData)
     {
+        gradient.setColorAt(0.0, m_dispColorConfig[block.id].startColor);
+        gradient.setColorAt(0.7, m_dispColorConfig[block.id].centerColor);
+        gradient.setColorAt(1.0, m_dispColorConfig[block.id].endColor);
+        painter.setBrush(gradient);//グラデーションをブラシにセット
+
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;
         const int py = pos.posY * s_bSz + detailPosY;
