@@ -14,7 +14,7 @@
 std::shared_ptr<Tetrimino> TetriminoCreateNormal::CreateTetrimino()
 {
     std::uniform_int_distribution<int> dist(1,7);
-    switch(dist(m_mt))
+    switch(dist(_mt))
     {
     case 1: return std::shared_ptr<Tetrimino>(new Tetrimino_I);
     case 2: return std::shared_ptr<Tetrimino>(new Tetrimino_J);

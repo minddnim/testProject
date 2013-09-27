@@ -6,21 +6,21 @@ ConvDispInfo::ConvDispInfo()
     // 両側の壁の定義
     for(int py = 0; py < s_fldH; ++py)
     {
-        m_blockWall.emplace_back(Block({-1, py}, s_blockColorID));
-        m_blockWall.emplace_back(Block({s_fldW, py}, s_blockColorID));
+        _blockWall.emplace_back(Block({-1, py}, s_blockColorID));
+        _blockWall.emplace_back(Block({s_fldW, py}, s_blockColorID));
     }
 
     // 底の壁の定義
     for(int px = -1; px < s_fldW+1; ++px)
     {
-        m_blockWall.emplace_back(Block({px, s_fldH}, s_blockColorID));
+        _blockWall.emplace_back(Block({px, s_fldH}, s_blockColorID));
     }
 }
 
 std::vector<Block>
 ConvDispInfo::GetWallData() const
 {
-    return m_blockWall;
+    return _blockWall;
 }
 
 std::vector<Block>

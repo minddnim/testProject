@@ -19,17 +19,17 @@ private:
 
 public:
     MyselfTetrimino()
-        : _nowPos(s_startPos)
-        , _rotAngle(ROTATE_ANGLE::ROT_0)
-        , _tet(nullptr)
+        : m_nowPos(s_startPos)
+        , m_rotAngle(ROTATE_ANGLE::ROT_0)
+        , m_tet(nullptr)
     {}
 
     ~MyselfTetrimino(){}
 
 private:
-    Pos _nowPos;
-    ROTATE_ANGLE _rotAngle;
-    std::shared_ptr<Tetrimino> _tet;
+    Pos m_nowPos;
+    ROTATE_ANGLE m_rotAngle;
+    std::shared_ptr<Tetrimino> m_tet;
     static const Pos s_startPos;
 
 public:

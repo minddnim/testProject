@@ -5,14 +5,14 @@
 TetrisField::TetrisField()
 {
     for(int i = 0; i < s_fldHeight; ++i)
-        m_field.emplace_back();
+        _field.emplace_back();
 
-    for(auto line : m_field)
+    for(auto line : _field)
         line.fill(0);
 
 //    // テスト表示用データ
-//    auto it = m_field.begin(); ++it;++it;++it;++it;
-//    for(; it != m_field.end(); ++it)
+//    auto it = _field.begin(); ++it;++it;++it;++it;
+//    for(; it != _field.end(); ++it)
 //        (*it)[2] = 1;
 }
 
@@ -22,8 +22,8 @@ TetrisField::AddBlock(const std::vector<Block>& blocks)
     for(auto block : blocks)
     {
         // ここの部分は処理が遅いので、後で修正する
-        auto it = m_field.begin();
-        for(int py = 0; it != m_field.end(); ++py, ++it)
+        auto it = _field.begin();
+        for(int py = 0; it != _field.end(); ++py, ++it)
             if(py == block.p.posY) (*it)[block.p.posX] = block.id;
     }
 }
@@ -31,7 +31,7 @@ TetrisField::AddBlock(const std::vector<Block>& blocks)
 void
 TetrisField::DeleteLine()
 {
-    m_field.remove_if([](std::array<ColorID,s_fldWidth> line)
+    _field.remove_if([](std::array<ColorID,s_fldWidth> line)
     {
         for(const auto x : line)
             if(x == 0) return false;
@@ -42,10 +42,10 @@ TetrisField::DeleteLine()
 void
 TetrisField::AddLine()
 {
-    int addLine = s_fldHeight - m_field.size();
+    int addLine = s_fldHeight - _field.size();
     for(int i=0; i < addLine; ++i)
     {
-        m_field.emplace_front();
+        _field.emplace_front();
     }
 }
 
@@ -53,8 +53,8 @@ std::vector<Block>
 TetrisField::GetTetrisField() const
 {
     std::vector<Block> field;
-    auto it = m_field.begin();
-    for(int py = 0; it != m_field.end(); ++py, ++it)
+    auto it = _field.begin();
+    for(int py = 0; it != _field.end(); ++py, ++it)
     {
         for(int px = 0; px < (*it).size(); ++px)
         {
@@ -75,8 +75,8 @@ ColorID
 TetrisField::GetBlockColorID(const Pos& p) const
 {
     if(!IsPosInRange(p)) return -1;
-    auto it = m_field.begin();
-    for(int py = 0; it != m_field.end(); ++py, ++it)
+    auto it = _field.begin();
+    for(int py = 0; it != _field.end(); ++py, ++it)
         if(py == p.posY) return (*it)[p.posX];
     return -1;
 }

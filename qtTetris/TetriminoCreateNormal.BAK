@@ -10,15 +10,15 @@ class TetriminoCreateNormal
 {
 public:
     TetriminoCreateNormal()
-//        : _rng(std::rando_device()())
-        : _randDevice()
-        , _mt(_randDevice())
+//        : m_rng(std::random_device()())
+        : m_randDevice()
+        , m_mt(m_randDevice())
     {}
     virtual ~TetriminoCreateNormal(){}
 
     virtual std::shared_ptr<Tetrimino> CreateTetrimino();
-    std::random_device _randDevice;
-    std::mt19937 _mt;
+    std::random_device m_randDevice;
+    std::mt19937 m_mt;
 };
 
 #endif // TETRIMINOCREATENORMAL_H

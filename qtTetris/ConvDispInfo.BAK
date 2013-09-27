@@ -14,7 +14,7 @@ private:
     static const ColorID s_blockColorID = -1;
     static const int s_fldH = 20;
     static const int s_fldW = 10;
-    std::vector<Block> _blockWall;
+    std::vector<Block> m_blockWall;
 
 public:
     std::vector<Block> GetWallData() const;

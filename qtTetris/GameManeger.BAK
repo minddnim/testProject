@@ -27,12 +27,12 @@ private:
     GameManeger& operator=(const GameManeger& rhs);
 
 private:
-    TetriminoCreateNormal _tetriminoFactory;
-    MyselfTetrimino _myBlock;
-    TetrisField _field;
+    TetriminoCreateNormal m_tetriminoFactory;
+    MyselfTetrimino m_myBlock;
+    TetrisField m_field;
 
     static const int s_intvalTime = 200;  // ここを大きくすると落ちる速度が低下
-    int _freeFallCnt = -s_intvalTime;
+    int m_freeFallCnt = -s_intvalTime;
 
 public:
     std::vector<Block> GetField() const;

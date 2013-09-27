@@ -26,11 +26,11 @@ private:
     static const int s_orgPy = 80;
     static const int s_bSz = 20;
 
-    QTimer *_timer;            // タイマーオブジェクト
+    QTimer *m_timer;            // タイマーオブジェクト
     static const int TIMER = 1;
 
-    ConvDispInfo _info;
-    Controller _ctrl;
+    ConvDispInfo m_info;
+    Controller m_ctrl;
 
     struct SetColors
     {
@@ -38,7 +38,7 @@ private:
         QColor centerColor;
         QColor endColor;
     };
-    std::map<ColorID, SetColors> _dispColorConfig;
+    std::map<ColorID, SetColors> m_dispColorConfig;
 
 protected:
     void paintEvent(QPaintEvent *e);

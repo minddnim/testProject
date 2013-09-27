@@ -15,7 +15,7 @@ public:
 private:
     static const int s_fldWidth = 10;
     static const int s_fldHeight = 20+4;
-    std::list<std::array<ColorID,s_fldWidth>> _field;
+    std::list<std::array<ColorID,s_fldWidth>> m_field;
 
 private:
     bool IsPosInRange(const Pos& p) const;

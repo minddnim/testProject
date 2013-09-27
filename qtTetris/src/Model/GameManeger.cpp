@@ -3,34 +3,34 @@
 std::vector<Block>
 GameManeger::GetField() const
 {
-    return m_field.GetTetrisField();
+    return _field.GetTetrisField();
 }
 
 std::vector<Block>
 GameManeger::GetCtrlBlock() const
 {
-    return m_myBlock.GetTetriminoPos();
+    return _myBlock.GetTetriminoPos();
 }
 
 double
 GameManeger::GetDetailPos() const
 {
-    return static_cast<double>(m_freeFallCnt)/s_intvalTime;
+    return static_cast<double>(_freeFallCnt)/s_intvalTime;
 }
 
 void
 GameManeger::GameStart()
 {
-    m_myBlock.SetTetrimino(m_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
 }
 
 void
 GameManeger::update()
 {
-    m_freeFallCnt++;
-    if(m_freeFallCnt >= 0)
+    _freeFallCnt++;
+    if(_freeFallCnt >= 0)
     {
-        m_freeFallCnt = -s_intvalTime;
+        _freeFallCnt = -s_intvalTime;
         FreeFall();
     }
 }
@@ -38,44 +38,44 @@ GameManeger::update()
 void
 GameManeger::TryRotateRight()
 {
-    m_myBlock.RotToRight();
+    _myBlock.RotToRight();
     if(!CanMoveTetrimino({0,0}))
-        m_myBlock.RotToLeft();
+        _myBlock.RotToLeft();
 }
 
 void
 GameManeger::TryRotateLeft()
 {
-    m_myBlock.RotToLeft();
+    _myBlock.RotToLeft();
     if(!CanMoveTetrimino({0,0}))
-        m_myBlock.RotToRight();
+        _myBlock.RotToRight();
 }
 
 void
 GameManeger::TryMoveRight()
 {
     if(CanMoveTetrimino({1,0}))
-        m_myBlock.MoveRight();
+        _myBlock.MoveRight();
 }
 
 void
 GameManeger::TryMoveLeft()
 {
     if(CanMoveTetrimino({-1,0}))
-        m_myBlock.MoveLeft();
+        _myBlock.MoveLeft();
 }
 
 void
 GameManeger::TryMoveDown()
 {
     if(CanMoveTetrimino({0,1}))
-        m_myBlock.MoveDown();
+        _myBlock.MoveDown();
 }
 
 void
 GameManeger::TryMoveButtom()
 {
-    m_myBlock.MoveBottom();
+    _myBlock.MoveBottom();
 }
 
 void
@@ -83,33 +83,33 @@ GameManeger::FreeFall()
 {
     if(CanMoveTetrimino({0,1}))
     {
-        m_myBlock.MoveDown();
+        _myBlock.MoveDown();
     }
     else
     {
         DecisionMyTetrimino();
-        m_field.DeleteLine();
-        m_field.AddLine();
-        m_myBlock.ResetPosition();
-        m_myBlock.SetTetrimino(m_tetriminoFactory.CreateTetrimino());
+        _field.DeleteLine();
+        _field.AddLine();
+        _myBlock.ResetPosition();
+        _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
     }
 }
 
 void
 GameManeger::DecisionMyTetrimino()
 {
-    m_field.AddBlock(m_myBlock.GetTetriminoPos());
+    _field.AddBlock(_myBlock.GetTetriminoPos());
 }
 
 bool
 GameManeger::CanMoveTetrimino(const Pos& movePos) const
 {
-    const std::vector<Block> blocks = m_myBlock.GetTetriminoPos();
+    const std::vector<Block> blocks = _myBlock.GetTetriminoPos();
     for(const auto block : blocks)
     {
         int px = block.p.posX + movePos.posX;
         int py = block.p.posY + movePos.posY;
-        if(m_field.ExistBlock({px, py})) return false;
+        if(_field.ExistBlock({px, py})) return false;
     }
     return true;
 }

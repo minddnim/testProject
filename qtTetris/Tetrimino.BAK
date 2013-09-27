@@ -8,24 +8,24 @@ class Tetrimino
 {
 public:
     Tetrimino(ColorID cid, const std::vector<Pos>& form)
-            : _colorID(cid)
-            , _form(form)
+            : m_colorID(cid)
+            , m_form(form)
     {}
     virtual ~Tetrimino(){}
 
     const std::vector<Pos>& GetTetriminoForm() const
     {
-        return _form;
+        return m_form;
     }
 
     ColorID GetBlockColorID() const
     {
-        return _colorID;
+        return m_colorID;
     }
 
 protected:
-    const ColorID _colorID;
-    const std::vector<Pos> _form;
+    const ColorID m_colorID;
+    const std::vector<Pos> m_form;
 };
 
 #endif // TETRIMINO_H
