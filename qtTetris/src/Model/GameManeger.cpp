@@ -69,13 +69,23 @@ void
 GameManeger::TryMoveDown()
 {
     if(CanMoveTetrimino({0,1}))
+    {
         _myBlock.MoveDown();
+    }
+    else
+    {
+        DecisionMyTetrimino();
+    }
 }
 
 void
 GameManeger::TryMoveButtom()
 {
-    _myBlock.MoveBottom();
+    while(CanMoveTetrimino({0,1}))
+    {
+        _myBlock.MoveDown();
+    }
+    DecisionMyTetrimino();
 }
 
 void
@@ -88,10 +98,6 @@ GameManeger::FreeFall()
     else
     {
         DecisionMyTetrimino();
-        _field.DeleteLine();
-        _field.AddLine();
-        _myBlock.ResetPosition();
-        _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
     }
 }
 
@@ -99,6 +105,11 @@ void
 GameManeger::DecisionMyTetrimino()
 {
     _field.AddBlock(_myBlock.GetTetriminoPos());
+    _field.DeleteLine();
+    _field.AddLine();
+    _myBlock.ResetPosition();
+    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
+    _freeFallCnt = -s_intvalTime;
 }
 
 bool

@@ -49,11 +49,6 @@ MyselfTetrimino::MoveDown()
     _nowPos.posY++;
 }
 
-void
-MyselfTetrimino::MoveBottom()
-{
-}
-
 void MyselfTetrimino::ResetPosition()
 {
     _nowPos = s_startPos;

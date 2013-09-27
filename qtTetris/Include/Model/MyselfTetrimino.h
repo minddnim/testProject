@@ -38,7 +38,6 @@ public:
     void MoveRight();
     void MoveLeft();
     void MoveDown();
-    void MoveBottom();
     void ResetPosition();
 
     Pos GetNowPos() const;
