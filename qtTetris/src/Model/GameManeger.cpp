@@ -39,12 +39,16 @@ void
 GameManeger::TryRotateRight()
 {
     m_myBlock.RotToRight();
+    if(!CanMoveTetrimino({0,0}))
+        m_myBlock.RotToLeft();
 }
 
 void
 GameManeger::TryRotateLeft()
 {
     m_myBlock.RotToLeft();
+    if(!CanMoveTetrimino({0,0}))
+        m_myBlock.RotToRight();
 }
 
 void
