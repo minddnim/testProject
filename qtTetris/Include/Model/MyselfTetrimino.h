@@ -28,9 +28,11 @@ public:
 
 private:
     Pos _nowPos;
+    Pos _ghostPos;
     ROTATE_ANGLE _rotAngle;
     std::shared_ptr<Tetrimino> _tet;
     static const Pos s_startPos;
+    static const double s_alpha;
 
 public:
     void RotToLeft();
@@ -40,8 +42,11 @@ public:
     void MoveDown();
     void ResetPosition();
 
+    void SetGhostPos(const Pos& p);
+    void SetNowPos(const Pos& p);
     Pos GetNowPos() const;
     std::vector<Block> GetTetriminoPos() const;
+    std::vector<Block> GetTetriminoGhostPos() const;
     void SetTetrimino(std::shared_ptr<Tetrimino> tet);
 
 private:

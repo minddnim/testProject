@@ -12,6 +12,12 @@ GameManeger::GetCtrlBlock() const
     return _myBlock.GetTetriminoPos();
 }
 
+std::vector<Block>
+GameManeger::GetCtrlGhostBlock() const
+{
+    return _myBlock.GetTetriminoGhostPos();
+}
+
 double
 GameManeger::GetDetailPos() const
 {
@@ -25,7 +31,7 @@ GameManeger::GameStart()
 }
 
 void
-GameManeger::update()
+GameManeger::Update()
 {
     _freeFallCnt++;
     if(_freeFallCnt >= 0)
@@ -33,6 +39,19 @@ GameManeger::update()
         _freeFallCnt = -s_intvalTime;
         FreeFall();
     }
+}
+
+void
+GameManeger::UpdateGhostPos()
+{
+    auto nowPos = _myBlock.GetNowPos();
+    while(CanMoveTetrimino({0,1}))
+    {
+        _myBlock.MoveDown();
+    }
+    auto bottomPos = _myBlock.GetNowPos();
+    _myBlock.SetGhostPos(bottomPos);
+    _myBlock.SetNowPos(nowPos);
 }
 
 void

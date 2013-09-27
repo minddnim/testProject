@@ -39,6 +39,7 @@ Dialog::paintEvent(QPaintEvent *e)
     DrawWall();
     DrawField();
     DrawCtrlBlock();
+    DrawCtrlGhostBlock();
 }
 
 void
@@ -107,8 +108,8 @@ Dialog::DrawField()
     //線形グラデ
     QLinearGradient gradient(0, 0, s_bSz, s_bSz);
 
-    const auto wallData = _info.GetFieldData();
-    for(const auto block : wallData)
+    const auto fieldData = _info.GetFieldData();
+    for(const auto block : fieldData)
     {
         gradient.setColorAt(0.0, _dispColorConfig[block.id].startColor);
         gradient.setColorAt(0.7, _dispColorConfig[block.id].centerColor);
@@ -134,18 +135,44 @@ Dialog::DrawCtrlBlock()
     //線形グラデ
     QLinearGradient gradient(0, 0, s_bSz, s_bSz);
 
-    const auto wallData = _info.GetCtrlBlockData();
+    const auto blocksData = _info.GetCtrlBlockData();
     const int detailPosY = static_cast<int>(_info.GetDetailPos() * s_bSz);
-    for(const auto block : wallData)
+    for(const auto block : blocksData)
     {
         gradient.setColorAt(0.0, _dispColorConfig[block.id].startColor);
         gradient.setColorAt(0.7, _dispColorConfig[block.id].centerColor);
         gradient.setColorAt(1.0, _dispColorConfig[block.id].endColor);
         painter.setBrush(gradient);//グラデーションをブラシにセット
-
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;
         const int py = pos.posY * s_bSz + detailPosY;
+        painter.setBrushOrigin(px, py);
+        painter.drawRect(px, py, s_bSz, s_bSz);
+    }
+}
+
+void
+Dialog::DrawCtrlGhostBlock()
+{
+    QPainter painter(this);
+    painter.setPen(Qt::black);
+    //アンチエイリアスセット
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    //線形グラデ
+    QLinearGradient gradient(0, 0, s_bSz, s_bSz);
+
+    const auto blocksData = _info.GetCtrlGhostBlockData();
+    for(const auto block : blocksData)
+    {
+        gradient.setColorAt(0.0, _dispColorConfig[block.id].startColor);
+        gradient.setColorAt(0.7, _dispColorConfig[block.id].centerColor);
+        gradient.setColorAt(1.0, _dispColorConfig[block.id].endColor);
+        painter.setBrush(gradient);//グラデーションをブラシにセット
+        painter.setOpacity(block.alpha);
+        const Pos pos = block.p;
+        const int px = pos.posX * s_bSz + s_orgPx;
+        const int py = pos.posY * s_bSz;
         painter.setBrushOrigin(px, py);
         painter.drawRect(px, py, s_bSz, s_bSz);
     }

@@ -46,5 +46,5 @@ Controller::KeyPress_Left()
 void
 Controller::NotifyUpdate()
 {
-    GameManeger::GetInstance()->update();
+    GameManeger::GetInstance()->Update();
 }

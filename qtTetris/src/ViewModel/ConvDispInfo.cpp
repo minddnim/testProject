@@ -35,6 +35,13 @@ ConvDispInfo::GetCtrlBlockData() const
     return GameManeger::GetInstance()->GetCtrlBlock();
 }
 
+std::vector<Block>
+ConvDispInfo::GetCtrlGhostBlockData() const
+{
+    GameManeger::GetInstance()->UpdateGhostPos();
+    return GameManeger::GetInstance()->GetCtrlGhostBlock();
+}
+
 double
 ConvDispInfo::GetDetailPos() const
 {

@@ -9,11 +9,6 @@ TetrisField::TetrisField()
 
     for(auto line : _field)
         line.fill(0);
-
-//    // テスト表示用データ
-//    auto it = _field.begin(); ++it;++it;++it;++it;
-//    for(; it != _field.end(); ++it)
-//        (*it)[2] = 1;
 }
 
 void
@@ -59,7 +54,7 @@ TetrisField::GetTetrisField() const
         for(int px = 0; px < (*it).size(); ++px)
         {
             if(0 != (*it)[px])
-                field.emplace_back(Block({px, py}, (*it)[px]));
+                field.emplace_back(Block({px, py}, (*it)[px], 1.0));
         }
     }
     return field;

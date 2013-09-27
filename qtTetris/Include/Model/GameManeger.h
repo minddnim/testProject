@@ -37,10 +37,12 @@ private:
 public:
     std::vector<Block> GetField() const;
     std::vector<Block> GetCtrlBlock() const;
+    std::vector<Block> GetCtrlGhostBlock() const;
     double GetDetailPos() const;
 
     void GameStart();
-    void update();
+    void Update();
+    void UpdateGhostPos();
 
     void TryRotateRight();
     void TryRotateLeft();

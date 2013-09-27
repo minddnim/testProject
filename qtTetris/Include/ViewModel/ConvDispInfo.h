@@ -20,6 +20,7 @@ public:
     std::vector<Block> GetWallData() const;
     std::vector<Block> GetFieldData() const;
     std::vector<Block> GetCtrlBlockData() const;
+    std::vector<Block> GetCtrlGhostBlockData() const;
     double GetDetailPos() const;
 };
 

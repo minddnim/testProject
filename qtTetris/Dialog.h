@@ -51,6 +51,7 @@ private:
     void DrawWall();
     void DrawField();
     void DrawCtrlBlock();
+    void DrawCtrlGhostBlock();
 };
 
 #endif // DIALOG_H
