@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <random>
+#include <time.h>
 
 class Tetrimino;
 
@@ -12,7 +13,7 @@ public:
     TetriminoCreateNormal()
 //        : _rng(std::rando_device()())
         : _randDevice()
-        , _mt(_randDevice())
+        , _mt(time(nullptr))
     {}
     virtual ~TetriminoCreateNormal(){}
 

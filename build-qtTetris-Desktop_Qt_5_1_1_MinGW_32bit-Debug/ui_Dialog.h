@@ -25,6 +25,8 @@ class Ui_Dialog
 public:
     QLCDNumber *_scoreLCDNumber;
     QLabel *_scoreLabel;
+    QLabel *_levelLabel;
+    QLCDNumber *_LevelLCDNumber;
 
     void setupUi(QDialog *Dialog)
     {
@@ -60,6 +62,25 @@ public:
         _scoreLabel->setFrameShape(QFrame::NoFrame);
         _scoreLabel->setFrameShadow(QFrame::Plain);
         _scoreLabel->setLineWidth(1);
+        _levelLabel = new QLabel(Dialog);
+        _levelLabel->setObjectName(QStringLiteral("_levelLabel"));
+        _levelLabel->setGeometry(QRect(320, 90, 61, 16));
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::WindowText, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::WindowText, brush1);
+        _levelLabel->setPalette(palette1);
+        _levelLabel->setFont(font);
+        _levelLabel->setFrameShape(QFrame::NoFrame);
+        _levelLabel->setFrameShadow(QFrame::Plain);
+        _levelLabel->setLineWidth(1);
+        _LevelLCDNumber = new QLCDNumber(Dialog);
+        _LevelLCDNumber->setObjectName(QStringLiteral("_LevelLCDNumber"));
+        _LevelLCDNumber->setGeometry(QRect(320, 110, 64, 23));
+        _LevelLCDNumber->setSmallDecimalPoint(true);
+        _LevelLCDNumber->setMode(QLCDNumber::Dec);
+        _LevelLCDNumber->setSegmentStyle(QLCDNumber::Outline);
+        _LevelLCDNumber->setProperty("intValue", QVariant(1));
 
         retranslateUi(Dialog);
 
@@ -70,6 +91,7 @@ public:
     {
         Dialog->setWindowTitle(QApplication::translate("Dialog", "My Tetris", 0));
         _scoreLabel->setText(QApplication::translate("Dialog", "SCORE:", 0));
+        _levelLabel->setText(QApplication::translate("Dialog", "LEVEL:", 0));
     } // retranslateUi
 
 };
