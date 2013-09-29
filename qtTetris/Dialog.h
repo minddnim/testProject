@@ -48,6 +48,7 @@ protected:
 
 public slots:
     void OnTimer();
+    void OnPlayPause(bool play);
 
 private:
     void DrawWall();

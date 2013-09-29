@@ -13,8 +13,41 @@
   <property name="windowTitle">
    <string>My Tetris</string>
   </property>
+  <widget class="QPushButton" name="_pauseButton">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>560</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pause</string>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_pauseButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Dialog</receiver>
+   <slot>OnPlayPause(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>564</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>553</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>OnPlayPause(bool)</slot>
+ </slots>
 </ui>

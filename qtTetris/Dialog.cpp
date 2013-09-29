@@ -26,6 +26,9 @@ Dialog::Dialog(QWidget *parent) :
     connect(_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     _timer->start(s_timer);
 
+    ui->_pauseButton->setCheckable(true);
+    ui->_pauseButton->setChecked(true);
+
     _pixmap = new QPixmap(":bg.png");
 
     _ctrl.GameStart();
@@ -34,6 +37,20 @@ Dialog::Dialog(QWidget *parent) :
 Dialog::~Dialog()
 {
     delete ui;
+}
+
+void
+Dialog::OnPlayPause(bool play)
+{
+    ui->_pauseButton->setText(play ? tr("Pause") : tr("Play"));
+    if(play)
+    {
+        _timer->start(s_timer);
+    }
+    else
+    {
+        _timer->stop();
+    }
 }
 
 void
