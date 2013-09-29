@@ -22,6 +22,7 @@ public:
     std::vector<Block> GetCtrlBlockData() const;
     std::vector<Block> GetCtrlGhostBlockData() const;
     double GetDetailPos() const;
+    int GetDeleteLineCnt() const;
 };
 
 #endif // CONVDISPINFO_H

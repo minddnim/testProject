@@ -25,11 +25,12 @@ private:
     static const int s_orgPx = 50;
     static const int s_orgPy = 80;
     static const int s_bSz = 20;
+    bool _play = true;
 
-    QTimer *_timer;            // タイマーオブジェクト
+    QTimer* _timer;            // タイマーオブジェクト
     static const int s_timer = 1;
 
-    QPixmap *_pixmap;
+    QPixmap* _bgPixmap;
 
     ConvDispInfo _info;
     Controller _ctrl;
@@ -48,14 +49,15 @@ protected:
 
 public slots:
     void OnTimer();
-    void OnPlayPause(bool play);
 
 private:
+    void DrawBackGround();
     void DrawWall();
     void DrawField();
     void DrawCtrlBlock();
     void DrawCtrlGhostBlock();
     void Restart();
+    void OnPlayPause();
 };
 
 #endif // DIALOG_H

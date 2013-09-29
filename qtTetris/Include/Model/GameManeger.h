@@ -33,12 +33,14 @@ private:
 
     static const int s_intvalTime = 200;  // ここを大きくすると落ちる速度が低下
     int _freeFallCnt = -s_intvalTime;
+    int _deleteLineCnt = 0;
 
 public:
     std::vector<Block> GetField() const;
     std::vector<Block> GetCtrlBlock() const;
     std::vector<Block> GetCtrlGhostBlock() const;
     double GetDetailPos() const;
+    int GetDeleteLineCnt() const;
 
     void GameStart();
     bool IsGameOver();

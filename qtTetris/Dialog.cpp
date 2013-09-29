@@ -9,10 +9,11 @@
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Dialog)
+    ui(new Ui::Dialog),
+    _timer(new QTimer()),
+    _bgPixmap(new QPixmap(":/new/prefix/bg.jpg"))
 {
     ui->setupUi(this);
-
     _dispColorConfig[-1] = {Qt::white, Qt::lightGray, Qt::gray};
     _dispColorConfig[1] = {Qt::white, Qt::cyan, Qt::darkCyan};
     _dispColorConfig[2] = {Qt::white, Qt::blue, Qt::darkBlue};
@@ -22,14 +23,8 @@ Dialog::Dialog(QWidget *parent) :
     _dispColorConfig[6] = {Qt::white, Qt::magenta, Qt::darkMagenta};
     _dispColorConfig[7] = {Qt::white, Qt::red, Qt::darkRed};
 
-    _timer = new QTimer();
     connect(_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     _timer->start(s_timer);
-
-    ui->_pauseButton->setCheckable(true);
-    ui->_pauseButton->setChecked(true);
-
-    _pixmap = new QPixmap(":bg.png");
 
     _ctrl.GameStart();
 }
@@ -40,10 +35,10 @@ Dialog::~Dialog()
 }
 
 void
-Dialog::OnPlayPause(bool play)
+Dialog::OnPlayPause()
 {
-    ui->_pauseButton->setText(play ? tr("Pause") : tr("Play"));
-    if(play)
+    _play = !_play;
+    if(_play)
     {
         _timer->start(s_timer);
     }
@@ -56,10 +51,8 @@ Dialog::OnPlayPause(bool play)
 void
 Dialog::paintEvent(QPaintEvent *e)
 {
-    QPainter painter(_pixmap);
-//    QRect rect = \{0, 0, 400, 600};
-    painter.drawPixmap(0, 0, 400, 600, *_pixmap);
-
+    ui->_scoreLCDNumber->display(_info.GetDeleteLineCnt());
+    DrawBackGround();
     DrawWall();
     DrawField();
     DrawCtrlBlock();
@@ -83,15 +76,27 @@ Dialog::keyPressEvent(QKeyEvent *e)
     case Qt::Key_W:
         _ctrl.KeyPress_W();
         break;
-    case Qt::Key_Left:
+    case Qt::Key_J:
         _ctrl.KeyPress_Left();
         break;
-    case Qt::Key_Right:
+    case Qt::Key_K:
         _ctrl.KeyPress_Right();
+        break;
+    case Qt::Key_Space:
+        OnPlayPause();
         break;
     default:
         break;
     }
+}
+
+void
+Dialog::DrawBackGround()
+{
+    QPainter painter(this);
+    QRect rect;
+    rect.setSize(this->size());
+    painter.drawPixmap(rect, *_bgPixmap);
 }
 
 void
@@ -112,6 +117,7 @@ Dialog::DrawWall()
         gradient.setColorAt(0.7, _dispColorConfig[block.id].centerColor);
         gradient.setColorAt(1.0, _dispColorConfig[block.id].endColor);
         painter.setBrush(gradient);//グラデーションをブラシにセット
+        painter.setOpacity(0.2);
 
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;

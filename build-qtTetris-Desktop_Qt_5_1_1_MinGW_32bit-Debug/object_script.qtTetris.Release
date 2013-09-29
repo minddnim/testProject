@@ -1,7 +1,6 @@
 INPUT(
 ./release\main.o
 ./release\Dialog.o
-./release\TetriminoFactory.o
 ./release\TetriminoCreateNormal.o
 ./release\TetriminoCreateDifficult.o
 ./release\MyselfTetrimino.o

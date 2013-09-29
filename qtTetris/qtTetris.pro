@@ -19,7 +19,6 @@ QMAKE_CXXFLAGS += -std=c++0x
 
 SOURCES += main.cpp\
 	Dialog.cpp \
-    src/Model/TetriminoFactory.cpp \
     src/Model/TetriminoCreateNormal.cpp \
     src/Model/TetriminoCreateDifficult.cpp \
     src/Model/MyselfTetrimino.cpp \

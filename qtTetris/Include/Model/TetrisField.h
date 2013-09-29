@@ -23,7 +23,7 @@ private:
 
 public:
     void AddBlock(const std::vector<Block> &blocks);
-    void DeleteLine();
+    int DeleteLine();
     void AddLine();
     void ClearField();
 

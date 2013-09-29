@@ -47,3 +47,9 @@ ConvDispInfo::GetDetailPos() const
 {
     return GameManeger::GetInstance()->GetDetailPos();
 }
+
+int ConvDispInfo::GetDeleteLineCnt() const
+{
+    return GameManeger::GetInstance()->GetDeleteLineCnt();
+}
+

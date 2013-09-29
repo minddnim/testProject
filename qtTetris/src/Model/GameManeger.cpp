@@ -24,6 +24,12 @@ GameManeger::GetDetailPos() const
     return static_cast<double>(_freeFallCnt)/s_intvalTime;
 }
 
+int
+GameManeger::GetDeleteLineCnt() const
+{
+    return _deleteLineCnt;
+}
+
 void
 GameManeger::GameStart()
 {
@@ -43,6 +49,7 @@ GameManeger::Initialize()
     _myBlock.ResetPosition();
     _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
     _freeFallCnt = -s_intvalTime;
+    _deleteLineCnt = 0;
 }
 
 bool
@@ -59,7 +66,6 @@ GameManeger::Update()
         }
         return true;
     }
-    return false;
 }
 
 void
@@ -145,7 +151,7 @@ void
 GameManeger::DecisionMyTetrimino()
 {
     _field.AddBlock(_myBlock.GetTetriminoPos());
-    _field.DeleteLine();
+    _deleteLineCnt += _field.DeleteLine();
     _field.AddLine();
     _myBlock.ResetPosition();
     _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());

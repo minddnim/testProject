@@ -18,7 +18,7 @@ TetrisField::AddBlock(const std::vector<Block>& blocks)
     }
 }
 
-void
+int
 TetrisField::DeleteLine()
 {
     _field.remove_if([](std::array<ColorID,s_fldWidth> line)
@@ -27,6 +27,8 @@ TetrisField::DeleteLine()
             if(x == 0) return false;
         return true;
     });
+    const int deleteLineCnt = s_fldHeight - _field.size();
+    return deleteLineCnt;
 }
 
 void
