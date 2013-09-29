@@ -1,14 +1,9 @@
 #include "TetrisField.h"
 #include <array>
-//#include <vector>
 
 TetrisField::TetrisField()
 {
-    for(int i = 0; i < s_fldHeight; ++i)
-        _field.emplace_back();
-
-    for(auto line : _field)
-        line.fill(0);
+    ClearField();
 }
 
 void
@@ -44,6 +39,18 @@ TetrisField::AddLine()
     }
 }
 
+void
+TetrisField::ClearField()
+{
+    _field.clear();
+
+    for(int i = 0; i < s_fldHeight; ++i)
+        _field.emplace_back();
+
+    for(auto line : _field)
+        line.fill(0);
+}
+
 std::vector<Block>
 TetrisField::GetTetrisField() const
 {
@@ -74,6 +81,20 @@ TetrisField::GetBlockColorID(const Pos& p) const
     for(int py = 0; it != _field.end(); ++py, ++it)
         if(py == p.posY) return (*it)[p.posX];
     return -1;
+}
+
+bool
+TetrisField::IsFieldHeightOver() const
+{
+    auto it = _field.begin();
+    for(int i = 0; i < s_fldHeightMargin; ++i, ++it)
+    {
+        for(auto block : (*it))
+        {
+            if(0 != block) return true;
+        }
+    }
+    return false;
 }
 
 bool

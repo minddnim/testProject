@@ -18,7 +18,8 @@ public:
     void KeyPress_W();
     void KeyPress_Right();
     void KeyPress_Left();
-    void NotifyUpdate();
+    bool NotifyUpdate();
+    void Restart();
 };
 
 #endif // CONTROLLER_H

@@ -43,8 +43,14 @@ Controller::KeyPress_Left()
     GameManeger::GetInstance()->TryRotateLeft();
 }
 
-void
+bool
 Controller::NotifyUpdate()
 {
-    GameManeger::GetInstance()->Update();
+    return GameManeger::GetInstance()->Update();
+}
+
+void
+Controller::Restart()
+{
+    GameManeger::GetInstance()->Initialize();
 }

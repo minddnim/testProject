@@ -9,5 +9,6 @@ INPUT(
 ./release\ConvDispInfo.o
 ./release\GameManeger.o
 ./release\Controller.o
+./release\qrc_Dialog.o
 ./release\moc_Dialog.o
 );

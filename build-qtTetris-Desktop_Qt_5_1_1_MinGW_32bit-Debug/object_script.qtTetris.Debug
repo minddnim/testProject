@@ -9,5 +9,6 @@ INPUT(
 ./debug\ConvDispInfo.o
 ./debug\GameManeger.o
 ./debug\Controller.o
+./debug\qrc_Dialog.o
 ./debug\moc_Dialog.o
 );

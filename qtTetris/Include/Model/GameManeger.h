@@ -41,7 +41,9 @@ public:
     double GetDetailPos() const;
 
     void GameStart();
-    void Update();
+    bool IsGameOver();
+    void Initialize();
+    bool Update();
     void UpdateGhostPos();
 
     void TryRotateRight();

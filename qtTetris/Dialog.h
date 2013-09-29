@@ -27,7 +27,9 @@ private:
     static const int s_bSz = 20;
 
     QTimer *_timer;            // タイマーオブジェクト
-    static const int TIMER = 1;
+    static const int s_timer = 1;
+
+    QPixmap *_pixmap;
 
     ConvDispInfo _info;
     Controller _ctrl;
@@ -52,6 +54,7 @@ private:
     void DrawField();
     void DrawCtrlBlock();
     void DrawCtrlGhostBlock();
+    void Restart();
 };
 
 #endif // DIALOG_H

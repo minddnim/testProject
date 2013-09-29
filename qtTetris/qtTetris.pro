@@ -48,3 +48,6 @@ HEADERS  += Dialog.h \
     Include/Controll/Controller.h
 
 FORMS    += Dialog.ui
+
+RESOURCES += \
+    Dialog.qrc

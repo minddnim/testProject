@@ -5,6 +5,7 @@
 
 #include <QtGui>
 #include <QtCore>
+#include <QMessageBox>
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -23,7 +24,9 @@ Dialog::Dialog(QWidget *parent) :
 
     _timer = new QTimer();
     connect(_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
-    _timer->start(TIMER);
+    _timer->start(s_timer);
+
+    _pixmap = new QPixmap(":bg.png");
 
     _ctrl.GameStart();
 }
@@ -36,6 +39,10 @@ Dialog::~Dialog()
 void
 Dialog::paintEvent(QPaintEvent *e)
 {
+    QPainter painter(_pixmap);
+//    QRect rect = \{0, 0, 400, 600};
+    painter.drawPixmap(0, 0, 400, 600, *_pixmap);
+
     DrawWall();
     DrawField();
     DrawCtrlBlock();
@@ -181,6 +188,27 @@ Dialog::DrawCtrlGhostBlock()
 void
 Dialog::OnTimer()
 {
-    _ctrl.NotifyUpdate();
+    const bool isGameOver = !_ctrl.NotifyUpdate();
+    if(isGameOver)
+    {
+        _timer->stop();
+        if(QMessageBox::Yes ==
+           QMessageBox::question(this, "MyTetris GameOver", tr("GAMSEOVER\n\ngame again ?"),
+           QMessageBox::Yes | QMessageBox::No))
+        {
+            Restart();
+        }
+        else
+        {
+            qApp->quit();
+        }
+    }
     update(); // paintEvent関数を呼び出す
+}
+
+void
+Dialog::Restart()
+{
+    _timer->start(s_timer);
+    _ctrl.Restart();
 }

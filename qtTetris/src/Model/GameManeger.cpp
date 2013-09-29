@@ -30,15 +30,36 @@ GameManeger::GameStart()
     _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
 }
 
+bool
+GameManeger::IsGameOver()
+{
+    return _field.IsFieldHeightOver();
+}
+
 void
+GameManeger::Initialize()
+{
+    _field.ClearField();
+    _myBlock.ResetPosition();
+    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
+    _freeFallCnt = -s_intvalTime;
+}
+
+bool
 GameManeger::Update()
 {
-    _freeFallCnt++;
-    if(_freeFallCnt >= 0)
+    const bool isGameOver = _field.IsFieldHeightOver();
+    if(!isGameOver)
     {
-        _freeFallCnt = -s_intvalTime;
-        FreeFall();
+        _freeFallCnt++;
+        if(_freeFallCnt >= 0)
+        {
+            _freeFallCnt = -s_intvalTime;
+            FreeFall();
+        }
+        return true;
     }
+    return false;
 }
 
 void

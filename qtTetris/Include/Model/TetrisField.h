@@ -13,8 +13,9 @@ public:
     ~TetrisField(){}
 
 private:
+    static const int s_fldHeightMargin = 4;
     static const int s_fldWidth = 10;
-    static const int s_fldHeight = 20+4;
+    static const int s_fldHeight = 20 + s_fldHeightMargin;
     std::list<std::array<ColorID,s_fldWidth>> _field;
 
 private:
@@ -24,10 +25,12 @@ public:
     void AddBlock(const std::vector<Block> &blocks);
     void DeleteLine();
     void AddLine();
+    void ClearField();
 
     std::vector<Block> GetTetrisField() const;
     bool ExistBlock(const Pos& p) const;
     ColorID GetBlockColorID(const Pos& p) const;
+    bool IsFieldHeightOver() const;
 };
 
 #endif // TETRISFIELD_H
