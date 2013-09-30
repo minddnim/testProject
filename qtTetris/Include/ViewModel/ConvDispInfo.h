@@ -20,9 +20,11 @@ public:
     std::vector<Block> GetWallData() const;
     std::vector<Block> GetFieldData() const;
     std::vector<Block> GetCtrlBlockData() const;
+    std::vector<Block> GetNextBlockData() const;
     std::vector<Block> GetCtrlGhostBlockData() const;
     double GetDetailPos() const;
     int GetDeleteLineCnt() const;
+    int GetLevel() const;
 };
 
 #endif // CONVDISPINFO_H

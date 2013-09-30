@@ -13,6 +13,12 @@ GameManeger::GetCtrlBlock() const
 }
 
 std::vector<Block>
+GameManeger::GetNextBlock() const
+{
+    return _myBlock.GetNextTetriminoPos();
+}
+
+std::vector<Block>
 GameManeger::GetCtrlGhostBlock() const
 {
     return _myBlock.GetTetriminoGhostPos();
@@ -30,10 +36,16 @@ GameManeger::GetDeleteLineCnt() const
     return _deleteLineCnt;
 }
 
+int
+GameManeger::GetLevel() const
+{
+    return static_cast<int>(_deleteLineCnt/s_levelUpVal) + 1;
+}
+
 void
 GameManeger::GameStart()
 {
-    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
+    Initialize();
 }
 
 bool
@@ -47,7 +59,9 @@ GameManeger::Initialize()
 {
     _field.ClearField();
     _myBlock.ResetPosition();
-    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetTetrimino();
+    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
     _freeFallCnt = -s_intvalTime;
     _deleteLineCnt = 0;
 }
@@ -58,7 +72,7 @@ GameManeger::Update()
     const bool isGameOver = _field.IsFieldHeightOver();
     if(!isGameOver)
     {
-        _freeFallCnt++;
+        _freeFallCnt += GetLevel();
         if(_freeFallCnt >= 0)
         {
             _freeFallCnt = -s_intvalTime;
@@ -66,6 +80,7 @@ GameManeger::Update()
         }
         return true;
     }
+    return false;
 }
 
 void
@@ -154,7 +169,8 @@ GameManeger::DecisionMyTetrimino()
     _deleteLineCnt += _field.DeleteLine();
     _field.AddLine();
     _myBlock.ResetPosition();
-    _myBlock.SetTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetTetrimino();
+    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
     _freeFallCnt = -s_intvalTime;
 }
 

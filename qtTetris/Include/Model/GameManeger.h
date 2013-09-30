@@ -7,7 +7,6 @@
 #include "TetriminoFactory.h"
 #include "TetriminoCreateNormal.h"
 
-#include <memory>
 #include <vector>
 
 class GameManeger
@@ -34,13 +33,16 @@ private:
     static const int s_intvalTime = 200;  // ここを大きくすると落ちる速度が低下
     int _freeFallCnt = -s_intvalTime;
     int _deleteLineCnt = 0;
+    static const int s_levelUpVal = 4;
 
 public:
     std::vector<Block> GetField() const;
     std::vector<Block> GetCtrlBlock() const;
+    std::vector<Block> GetNextBlock() const;
     std::vector<Block> GetCtrlGhostBlock() const;
     double GetDetailPos() const;
     int GetDeleteLineCnt() const;
+    int GetLevel() const;
 
     void GameStart();
     bool IsGameOver();

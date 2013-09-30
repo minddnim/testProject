@@ -7,7 +7,7 @@ class Tetrimino_T : public Tetrimino
 {
 public:
     Tetrimino_T()
-        : Tetrimino(6, {{0,-1}, {-1,0}, {0,0}, {1,0}})
+        : Tetrimino(6, {{-1,0}, {0,0}, {0,1}, {1,0}})
     {}
     ~Tetrimino_T(){}
 };

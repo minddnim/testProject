@@ -53,6 +53,7 @@ MyselfTetrimino::MoveDown()
 void MyselfTetrimino::ResetPosition()
 {
     _nowPos = s_startPos;
+    _rotAngle = ROTATE_ANGLE::ROT_0;
 }
 
 void
@@ -87,6 +88,21 @@ MyselfTetrimino::GetTetriminoPos() const
         const int px = rotPos.posX + _nowPos.posX;
         const int py = rotPos.posY + _nowPos.posY;
         ps.emplace_back(Block({px, py}, clrId));
+    }
+    return ps;
+}
+
+std::vector<Block>
+MyselfTetrimino::GetNextTetriminoPos() const
+{
+    if(!_nextTet) throw std::exception();
+
+    auto blockPos = _nextTet->GetTetriminoForm();
+    const auto clrId = _nextTet->GetBlockColorID();
+    std::vector<Block> ps;
+    for(auto p : blockPos)
+    {
+        ps.emplace_back(Block({p.posX, p.posY}, clrId));
     }
     return ps;
 }
@@ -141,8 +157,15 @@ MyselfTetrimino::RotatePos(const Pos& p) const
 }
 
 void
-MyselfTetrimino::SetTetrimino(std::shared_ptr<Tetrimino> tet)
+MyselfTetrimino::SetTetrimino()
+{
+    if(!_nextTet) return;
+    _tet = _nextTet;
+}
+
+void
+MyselfTetrimino::SetNextTetrimino(std::shared_ptr<Tetrimino> tet)
 {
     if(!tet) return;
-    _tet = tet;
+    _nextTet = tet;
 }

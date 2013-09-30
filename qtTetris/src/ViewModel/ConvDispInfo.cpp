@@ -42,14 +42,26 @@ ConvDispInfo::GetCtrlGhostBlockData() const
     return GameManeger::GetInstance()->GetCtrlGhostBlock();
 }
 
+std::vector<Block>
+ConvDispInfo::GetNextBlockData() const
+{
+    return GameManeger::GetInstance()->GetNextBlock();
+}
+
 double
 ConvDispInfo::GetDetailPos() const
 {
     return GameManeger::GetInstance()->GetDetailPos();
 }
 
-int ConvDispInfo::GetDeleteLineCnt() const
+int
+ConvDispInfo::GetDeleteLineCnt() const
 {
     return GameManeger::GetInstance()->GetDeleteLineCnt();
 }
 
+int
+ConvDispInfo::GetLevel() const
+{
+    return GameManeger::GetInstance()->GetLevel();
+}

@@ -31,6 +31,7 @@ private:
     Pos _ghostPos;
     ROTATE_ANGLE _rotAngle;
     std::shared_ptr<Tetrimino> _tet;
+    std::shared_ptr<Tetrimino> _nextTet;
     static const Pos s_startPos;
     static const double s_alpha;
 
@@ -46,8 +47,10 @@ public:
     void SetNowPos(const Pos& p);
     Pos GetNowPos() const;
     std::vector<Block> GetTetriminoPos() const;
+    std::vector<Block> GetNextTetriminoPos() const;
     std::vector<Block> GetTetriminoGhostPos() const;
-    void SetTetrimino(std::shared_ptr<Tetrimino> tet);
+    void SetTetrimino();
+    void SetNextTetrimino(std::shared_ptr<Tetrimino> tet);
 
 private:
     Pos RotatePos(const Pos& p) const;

@@ -52,10 +52,12 @@ void
 Dialog::paintEvent(QPaintEvent *e)
 {
     ui->_scoreLCDNumber->display(_info.GetDeleteLineCnt());
+    ui->_levelLCDNumber->display(_info.GetLevel());
     DrawBackGround();
     DrawWall();
     DrawField();
     DrawCtrlBlock();
+    DrawNextBlock();
     DrawCtrlGhostBlock();
 }
 
@@ -176,6 +178,32 @@ Dialog::DrawCtrlBlock()
         const Pos pos = block.p;
         const int px = pos.posX * s_bSz + s_orgPx;
         const int py = pos.posY * s_bSz + detailPosY;
+        painter.setBrushOrigin(px, py);
+        painter.drawRect(px, py, s_bSz, s_bSz);
+    }
+}
+
+void
+Dialog::DrawNextBlock()
+{
+    QPainter painter(this);
+    painter.setPen(Qt::black);
+    //アンチエイリアスセット
+    painter.setRenderHint(QPainter::Antialiasing, true);
+
+    //線形グラデ
+    QLinearGradient gradient(0, 0, s_bSz, s_bSz);
+
+    const auto blocksData = _info.GetNextBlockData();
+    for(const auto block : blocksData)
+    {
+        gradient.setColorAt(0.0, _dispColorConfig[block.id].startColor);
+        gradient.setColorAt(0.7, _dispColorConfig[block.id].centerColor);
+        gradient.setColorAt(1.0, _dispColorConfig[block.id].endColor);
+        painter.setBrush(gradient);//グラデーションをブラシにセット
+        const Pos pos = block.p;
+        const int px = pos.posX * s_bSz + s_nextOrgPx;
+        const int py = pos.posY * s_bSz + s_nextOrgPy;
         painter.setBrushOrigin(px, py);
         painter.drawRect(px, py, s_bSz, s_bSz);
     }

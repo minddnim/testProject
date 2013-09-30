@@ -24,6 +24,8 @@ private:
     Ui::Dialog *ui;
     static const int s_orgPx = 50;
     static const int s_orgPy = 80;
+    static const int s_nextOrgPx = 320;
+    static const int s_nextOrgPy = 60;
     static const int s_bSz = 20;
     bool _play = true;
 
@@ -55,6 +57,7 @@ private:
     void DrawWall();
     void DrawField();
     void DrawCtrlBlock();
+    void DrawNextBlock();
     void DrawCtrlGhostBlock();
     void Restart();
     void OnPlayPause();
