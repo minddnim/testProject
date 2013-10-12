@@ -2,7 +2,7 @@
 #define DIALOG_H
 
 #include "ConvDispInfo.h"
-#include "Controller.h"
+#include "StateMode.h"
 
 #include <QDialog>
 
@@ -18,7 +18,9 @@ class Dialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit Dialog(QWidget *parent = 0);
+//    explicit Dialog(QWidget *parent = 0){}
+    Dialog(StateMode* state, QWidget *parent = 0);
+
     ~Dialog();
 
 private:
@@ -28,7 +30,6 @@ private:
     static const int s_nextOrgPx = 320;
     static const int s_nextOrgPy = 60;
     static const int s_bSz = 20;
-    bool _play = true;
 
     QTimer* _timer;            // タイマーオブジェクト
     static const int s_timer = 1;
@@ -36,7 +37,7 @@ private:
     QPixmap* _bgPixmap;
 
     ConvDispInfo _info;
-    Controller _ctrl;
+    StateMode* _state;
 
     struct SetColors
     {

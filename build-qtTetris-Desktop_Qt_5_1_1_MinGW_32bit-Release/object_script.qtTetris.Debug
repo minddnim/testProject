@@ -8,6 +8,9 @@ INPUT(
 ./debug\ConvDispInfo.o
 ./debug\GameManeger.o
 ./debug\Controller.o
+./debug\StatePlayMode.o
+./debug\StatePauseMode.o
+./debug\StateMode.o
 ./debug\qrc_Dialog.o
 ./debug\moc_Dialog.o
 );

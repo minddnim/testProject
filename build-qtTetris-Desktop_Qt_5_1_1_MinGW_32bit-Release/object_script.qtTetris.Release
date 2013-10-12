@@ -8,6 +8,9 @@ INPUT(
 ./release\ConvDispInfo.o
 ./release\GameManeger.o
 ./release\Controller.o
+./release\StatePlayMode.o
+./release\StatePauseMode.o
+./release\StateMode.o
 ./release\qrc_Dialog.o
 ./release\moc_Dialog.o
 );

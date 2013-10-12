@@ -2,12 +2,6 @@
 #include "GameManeger.h"
 
 void
-Controller::GameStart()
-{
-    GameManeger::GetInstance()->GameStart();
-}
-
-void
 Controller::KeyPress_A()
 {
     GameManeger::GetInstance()->TryMoveLeft();
@@ -53,17 +47,4 @@ void
 Controller::Restart()
 {
     GameManeger::GetInstance()->Initialize();
-}
-
-void
-Controller::SelectMode(bool isDifficultMode)
-{
-    if(isDifficultMode)
-    {
-        GameManeger::GetInstance()->SetDifficultMode();
-    }
-    else
-    {
-        GameManeger::GetInstance()->SetNormalMode();
-    }
 }

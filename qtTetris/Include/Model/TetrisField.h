@@ -2,8 +2,8 @@
 #define TETRISFIELD_H
 
 #include "DataDefine.h"
-#include "Tetrimino.h"
 #include <list>
+#include <vector>
 #include <array>
 
 class TetrisField

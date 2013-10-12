@@ -7,10 +7,11 @@
 #include <QtCore>
 #include <QMessageBox>
 
-Dialog::Dialog(QWidget *parent) :
+Dialog::Dialog(StateMode *state, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog),
     _timer(new QTimer()),
+    _state(state),
     _bgPixmap(new QPixmap(":/new/BGA/bg.jpg"))
 {
     ui->setupUi(this);
@@ -26,33 +27,11 @@ Dialog::Dialog(QWidget *parent) :
 
     connect(_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     _timer->start(s_timer);
-
-//    const bool isDifficultMode = QMessageBox::Yes ==
-//            QMessageBox::question(this, "Mode select", tr("Do you play DifficultMode?"),
-//                                  QMessageBox::Yes | QMessageBox::No);
-    const bool isDifficultMode = false;
-    _ctrl.SelectMode(isDifficultMode);
-
-    _ctrl.GameStart();
 }
 
 Dialog::~Dialog()
 {
     delete ui;
-}
-
-void
-Dialog::OnPlayPause()
-{
-    _play = !_play;
-    if(_play)
-    {
-        _timer->start(s_timer);
-    }
-    else
-    {
-        _timer->stop();
-    }
 }
 
 void
@@ -71,39 +50,7 @@ Dialog::paintEvent(QPaintEvent *e)
 void
 Dialog::keyPressEvent(QKeyEvent *e)
 {
-    if(e->key() == Qt::Key_Space)
-    {
-        OnPlayPause();
-        return;
-    }
-
-    if(!_play) return;
-
-    switch(e->key())
-    {
-    case Qt::Key_A:
-        _ctrl.KeyPress_A();
-        break;
-    case Qt::Key_S:
-        _ctrl.KeyPress_S();
-        break;
-    case Qt::Key_D:
-        _ctrl.KeyPress_D();
-        break;
-    case Qt::Key_W:
-        _ctrl.KeyPress_W();
-        break;
-    case Qt::Key_J:
-        _ctrl.KeyPress_Left();
-        break;
-    case Qt::Key_K:
-        _ctrl.KeyPress_Right();
-        break;
-    case Qt::Key_Space:
-        break;
-    default:
-        break;
-    }
+    _state = _state->CommandExecute(e);
 }
 
 void
@@ -253,7 +200,7 @@ Dialog::DrawCtrlGhostBlock()
 void
 Dialog::OnTimer()
 {
-    const bool isGameOver = !_ctrl.NotifyUpdate();
+    const bool isGameOver = !_state->NotifyUpdate();
     if(isGameOver)
     {
         _timer->stop();
@@ -275,5 +222,5 @@ void
 Dialog::Restart()
 {
     _timer->start(s_timer);
-    _ctrl.Restart();
+    _state->Restart();
 }

@@ -25,7 +25,10 @@ SOURCES += main.cpp\
     src/Model/TetrisField.cpp \
     src/ViewModel/ConvDispInfo.cpp \
     src/Model/GameManeger.cpp \
-    src/Controll/Controller.cpp
+    src/Controll/Controller.cpp \
+    StatePlayMode.cpp \
+    StatePauseMode.cpp \
+    StateMode.cpp
 
 HEADERS  += Dialog.h \
     Include/Model/Tetrimino_Z.h \
@@ -52,7 +55,10 @@ HEADERS  += Dialog.h \
     Include/Model/Tetrimino__I.h \
     Include/Model/Tetrimino__E.h \
     Include/Model/Tetrimino__D.h \
-    Include/Model/Tetrimino__A.h
+    Include/Model/Tetrimino__A.h \
+    StatePlayMode.h \
+    StatePauseMode.h \
+    StateMode.h
 
 FORMS    += Dialog.ui
 

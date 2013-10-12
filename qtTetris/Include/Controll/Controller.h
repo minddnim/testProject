@@ -11,7 +11,6 @@ public:
     ~Controller(){}
 
 public:
-    void GameStart();
     void KeyPress_A();
     void KeyPress_S();
     void KeyPress_D();
@@ -20,7 +19,6 @@ public:
     void KeyPress_Left();
     bool NotifyUpdate();
     void Restart();
-    void SelectMode(bool isDifficultMode);
 };
 
 #endif // CONTROLLER_H
