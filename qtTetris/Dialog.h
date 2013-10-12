@@ -5,6 +5,7 @@
 #include "Controller.h"
 
 #include <QDialog>
+
 #include <vector>
 #include <map>
 

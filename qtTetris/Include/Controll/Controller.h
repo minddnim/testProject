@@ -20,6 +20,7 @@ public:
     void KeyPress_Left();
     bool NotifyUpdate();
     void Restart();
+    void SelectMode(bool isDifficultMode);
 };
 
 #endif // CONTROLLER_H

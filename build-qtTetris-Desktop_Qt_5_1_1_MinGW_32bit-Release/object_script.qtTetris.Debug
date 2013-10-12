@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\Dialog.o
+./debug\TetriminoCreateNormal.o
+./debug\TetriminoCreateDifficult.o
+./debug\MyselfTetrimino.o
+./debug\TetrisField.o
+./debug\ConvDispInfo.o
+./debug\GameManeger.o
+./debug\Controller.o
+./debug\qrc_Dialog.o
+./debug\moc_Dialog.o
+);

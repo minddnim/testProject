@@ -11,7 +11,7 @@ Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog),
     _timer(new QTimer()),
-    _bgPixmap(new QPixmap(":/new/prefix/bg.jpg"))
+    _bgPixmap(new QPixmap(":/new/BGA/bg.jpg"))
 {
     ui->setupUi(this);
     _dispColorConfig[-1] = {Qt::white, Qt::lightGray, Qt::gray};
@@ -22,9 +22,16 @@ Dialog::Dialog(QWidget *parent) :
     _dispColorConfig[5] = {Qt::white, Qt::green, Qt::darkGreen};
     _dispColorConfig[6] = {Qt::white, Qt::magenta, Qt::darkMagenta};
     _dispColorConfig[7] = {Qt::white, Qt::red, Qt::darkRed};
+    _dispColorConfig[8] = {Qt::white, Qt::white, Qt::white};
 
     connect(_timer, SIGNAL(timeout()), this, SLOT(OnTimer()));
     _timer->start(s_timer);
+
+//    const bool isDifficultMode = QMessageBox::Yes ==
+//            QMessageBox::question(this, "Mode select", tr("Do you play DifficultMode?"),
+//                                  QMessageBox::Yes | QMessageBox::No);
+    const bool isDifficultMode = false;
+    _ctrl.SelectMode(isDifficultMode);
 
     _ctrl.GameStart();
 }
@@ -64,6 +71,14 @@ Dialog::paintEvent(QPaintEvent *e)
 void
 Dialog::keyPressEvent(QKeyEvent *e)
 {
+    if(e->key() == Qt::Key_Space)
+    {
+        OnPlayPause();
+        return;
+    }
+
+    if(!_play) return;
+
     switch(e->key())
     {
     case Qt::Key_A:
@@ -85,7 +100,6 @@ Dialog::keyPressEvent(QKeyEvent *e)
         _ctrl.KeyPress_Right();
         break;
     case Qt::Key_Space:
-        OnPlayPause();
         break;
     default:
         break;

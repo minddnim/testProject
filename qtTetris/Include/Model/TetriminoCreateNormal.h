@@ -4,14 +4,14 @@
 #include <memory>
 #include <random>
 #include <time.h>
+#include <TetriminoFactory.h>
 
 class Tetrimino;
 
-class TetriminoCreateNormal
+class TetriminoCreateNormal : public TetriminoFactory
 {
 public:
     TetriminoCreateNormal()
-//        : _rng(std::rando_device()())
         : _mt(time(nullptr))
     {}
     virtual ~TetriminoCreateNormal(){}

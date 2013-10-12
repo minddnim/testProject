@@ -6,8 +6,10 @@
 #include "MyselfTetrimino.h"
 #include "TetriminoFactory.h"
 #include "TetriminoCreateNormal.h"
+#include "TetriminoCreateDifficult.h"
 
 #include <vector>
+#include <memory>
 
 class GameManeger
 {
@@ -26,7 +28,7 @@ private:
     GameManeger& operator=(const GameManeger& rhs);
 
 private:
-    TetriminoCreateNormal _tetriminoFactory;
+    TetriminoFactory* _tetriminoFactory = new TetriminoCreateDifficult();
     MyselfTetrimino _myBlock;
     TetrisField _field;
 
@@ -59,6 +61,8 @@ public:
 
     void FreeFall();
 
+    void SetDifficultMode();
+    void SetNormalMode();
 private:
     bool CanMoveTetrimino(const Pos& movePos) const;
     void DecisionMyTetrimino();

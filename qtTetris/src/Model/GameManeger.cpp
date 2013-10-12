@@ -59,9 +59,9 @@ GameManeger::Initialize()
 {
     _field.ClearField();
     _myBlock.ResetPosition();
-    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetNextTetrimino(_tetriminoFactory->CreateTetrimino());
     _myBlock.SetTetrimino();
-    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetNextTetrimino(_tetriminoFactory->CreateTetrimino());
     _freeFallCnt = -s_intvalTime;
     _deleteLineCnt = 0;
 }
@@ -162,6 +162,18 @@ GameManeger::FreeFall()
     }
 }
 
+void GameManeger::SetDifficultMode()
+{
+    if(_tetriminoFactory) delete _tetriminoFactory;
+    _tetriminoFactory = new TetriminoCreateDifficult();
+}
+
+void GameManeger::SetNormalMode()
+{
+    if(_tetriminoFactory) delete _tetriminoFactory;
+    _tetriminoFactory = new TetriminoCreateNormal();
+}
+
 void
 GameManeger::DecisionMyTetrimino()
 {
@@ -170,7 +182,7 @@ GameManeger::DecisionMyTetrimino()
     _field.AddLine();
     _myBlock.ResetPosition();
     _myBlock.SetTetrimino();
-    _myBlock.SetNextTetrimino(_tetriminoFactory.CreateTetrimino());
+    _myBlock.SetNextTetrimino(_tetriminoFactory->CreateTetrimino());
     _freeFallCnt = -s_intvalTime;
 }
 

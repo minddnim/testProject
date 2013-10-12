@@ -54,3 +54,16 @@ Controller::Restart()
 {
     GameManeger::GetInstance()->Initialize();
 }
+
+void
+Controller::SelectMode(bool isDifficultMode)
+{
+    if(isDifficultMode)
+    {
+        GameManeger::GetInstance()->SetDifficultMode();
+    }
+    else
+    {
+        GameManeger::GetInstance()->SetNormalMode();
+    }
+}

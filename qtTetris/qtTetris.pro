@@ -44,7 +44,15 @@ HEADERS  += Dialog.h \
     Include/Model/TetrisField.h \
     Include/ViewModel/ConvDispInfo.h \
     Include/Model/GameManeger.h \
-    Include/Controll/Controller.h
+    Include/Controll/Controller.h \
+    Include/Model/Tetrimino__S.h \
+    Include/Model/Tetrimino__R.h \
+    Include/Model/Tetrimino__N.h \
+    Include/Model/Tetrimino__M.h \
+    Include/Model/Tetrimino__I.h \
+    Include/Model/Tetrimino__E.h \
+    Include/Model/Tetrimino__D.h \
+    Include/Model/Tetrimino__A.h
 
 FORMS    += Dialog.ui
 
